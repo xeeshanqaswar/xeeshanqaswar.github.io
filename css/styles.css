@@ -95,15 +95,16 @@
    * color-2(#2F352B)
    * color-3(#1A1A1A)
    */
-    --color-1: #808181;
+    --color-1: #2e7a8a;
     --color-2: hsla(96, 10%, 19%, 1);
     --color-3: #40424a;
+    --color-4: #808181;
 
     /* theme color variations
    */
     --color-1-lightest: hsla(12, 75%, 75%, 1);
     --color-1-lighter: hsla(12, 75%, 65%, 1);
-    --color-1-light: hsla(12, 75%, 55%, 1);
+    --color-1-light: #3F9AAE;
     --color-1-dark: hsla(12, 75%, 35%, 1);
     --color-1-darker: hsla(12, 75%, 25%, 1);
     --color-1-darkest: hsla(12, 75%, 15%, 1);
@@ -2113,8 +2114,8 @@ input[type=button] {
     white-space: nowrap;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: var(--color-3);
-    border: 2px solid var(--color-3);
+    background-color: var(--color-btn);
+    border: 2px solid var(--color-btn);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -2190,8 +2191,8 @@ button.btn--large {
 button.btn--stroke {
     background: transparent !important;
     font-weight: 700;
-    border: 2px solid var(--color-1);
-    color: var(--color-1);
+    border: 2px solid var(--color-btn-stroke);
+    color: var(--color-btn-stroke-text);
 }
 
 .btn--stroke:focus,
@@ -3041,7 +3042,7 @@ td:last-child {
  * ------------------------------------------------------------------- */
 .s-header {
     --header-height: 72px;
-    --logo-width: 10.2rem;
+    --logo-width: 14rem;
     --width-grid-max: calc(var(--width-sixteen-cols) - calc(var(--gutter) * 2));
     --box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02),
         0 2px 2px rgba(0, 0, 0, 0.02),
@@ -3408,7 +3409,7 @@ td:last-child {
 .s-intro__content-pretitle {
     font-weight: 600;
     margin-bottom: var(--vspace-0_125);
-    color: var(--color-1);
+    color: var(--color-4);
 }
 
 .s-intro__content-title {
@@ -4215,7 +4216,7 @@ td:last-child {
     margin-top: auto;
     padding-top: var(--vspace-6);
     padding-bottom: var(--bottom-padding);
-    color: var(--color-gray-15);
+    color: var(--color-4);
 }
 
 .s-footer h5 {
