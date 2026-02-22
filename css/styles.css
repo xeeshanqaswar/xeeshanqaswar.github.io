@@ -3158,7 +3158,7 @@ td:last-child {
     font-weight: 400;
     font-size: 1.5rem;
     line-height: var(--vspace-1);
-    color: var(--color-gray-14);
+    color: var(--color-4);
     padding: 0 1.2rem;
     transition-property: color, background-color;
 }
