@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SPACE Case Study — Unity Architecture, Performance &amp; Research Tooling | Zeeshan Qaswar</title>
+    <meta name="description" content="Engineering case study on leading a multi-year iPad spatial-assessment platform in Unity, covering research tooling, localization, Addressables, memory, UI, and rendering optimization.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/case-studies/space/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="SPACE — Engineering a Research-Grade Spatial Assessment Platform in Unity">
+    <meta property="og:description" content="Engineering case study on leading a multi-year iPad spatial-assessment platform in Unity, covering research tooling, localization, Addressables, memory, UI, and rendering optimization.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/case-studies/space/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/folio/Space@2x.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="SPACE — Engineering a Research-Grade Spatial Assessment Platform in Unity">
+    <meta name="twitter:description" content="Engineering case study on leading a multi-year iPad spatial-assessment platform in Unity, covering research tooling, localization, Addressables, memory, UI, and rendering optimization.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/folio/Space@2x.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li class="current"><a href="../../index.html#case-studies" aria-current="page">Case Studies</a></li>
+                        <li><a href="../../index.html#work">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li>
+                        <li><a href="../../ZeeshanQaswar-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                            <li aria-current="page">SPACE</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Engineering case study</p>
+                    <h1 class="cs-hero__title">SPACE — Engineering a Research-Grade Spatial Assessment Platform in Unity</h1>
+                    <p class="cs-hero__subtitle">Three years of technical ownership across research tooling, complex UI, spatial configuration, localization, memory management, and iPad performance.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Lead Developer</dd></div><div><dt>Duration</dt><dd>~3 years</dd></div><div><dt>Development team</dt><dd>3 developers</dd></div><div><dt>Platform</dt><dd>iPad / iOS</dd></div><div><dt>Context</dt><dd>Research/client project, publicly demonstrated and used in published research</dd></div></dl>
+
+                    <p class="cs-hero__summary">Led the engineering of a research-grade spatial assessment platform, including a complex experiment-authoring dashboard, 2D-to-3D spatial configuration, 16-language localization, and profiler-driven memory, UI, and rendering optimization for iPad.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>Architecture</li><li>Performance</li><li>Memory</li><li>Research Tooling</li></ul>
+                        <ul class="cs-links"><li><a class="ext-link" href="https://www.youtube.com/watch?v=cHxbhemqbnA" target="_blank" rel="noopener">Demo video<span class="u-screen-reader-text"> (opens in new tab)</span></a></li><li><a class="ext-link" href="https://www.sciencedirect.com/science/article/pii/S0747563224002176" target="_blank" rel="noopener">Research paper<span class="u-screen-reader-text"> (opens in new tab)</span></a></li></ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#context">Context</a></li><li><a href="#responsibility">My responsibility</a></li><li><a href="#problem-authoring">Research authoring tools</a></li><li><a href="#problem-localization">16-language UI</a></li><li><a href="#problem-memory">Memory on iPad</a></li><li><a href="#problem-rendering">UI &amp; rendering performance</a></li><li><a href="#decisions">Key decisions</a></li><li><a href="#outcome">Outcome</a></li><li><a href="#reflection">Reflection</a></li><li><a href="#evidence">Media &amp; evidence</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="context" aria-labelledby="context-title">
+                                <span class="cs-kicker">Context</span>
+                                <h2 id="context-title">A research platform, not a conventional game</h2>
+                                
+                                <p>SPACE (Spatial Performance Assessment for Cognitive Evaluation) is an iPad-based spatial assessment platform developed in collaboration with researchers. The software had to translate evolving scientific requirements into an interactive, repeatable system for configuring spatial trials, guiding participants through tasks, and recording results.</p>
+                                <p>Unlike a conventional game project, the product had to remain flexible as the research evolved. That made long-term architecture, researcher-facing tooling, usability, data handling, and reliability as important as the 3D experience itself.</p>
+                            </section>
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>I served as Lead Developer for roughly three years and worked with two other developers. I was responsible for the majority of the Unity application and made the core architecture decisions while collaborating directly with the research team to turn experimental requirements into software behavior.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>What I owned</h3>
+                                <ul><li>Application architecture</li><li>Researcher/configuration dashboard</li><li>Major UI systems</li><li>Trial configuration and validation behavior</li><li>2D spatial configuration connected to the 3D environment</li><li>Localization implementation</li><li>Asset/memory lifecycle</li><li>Performance optimization</li><li>iOS device debugging and production support</li></ul>
+                            </div>
+                                <div class="cs-ownership__boundary">
+                                    <h3>Not mine</h3>
+                                    <ul><li>The scientific methodology, study design, and research findings belong to the research authors.</li><li>Two other developers contributed to the application.</li></ul>
+                                </div>
+                        </div>
+                    </section>
+                            <section class="cs-section" id="problem-authoring" aria-labelledby="problem-authoring-title">
+                                <span class="cs-kicker">Engineering problem 01</span>
+                                <h2 id="problem-authoring-title">Turning research rules into usable authoring tools</h2>
+                                
+                                <p>Researchers needed to configure landmark layouts and trials without manually editing game data. The resulting dashboard became a substantial authoring tool rather than a normal settings screen.</p>
+                                <p>The interface allowed landmarks to be dragged into a coordinate field, trials to be created from landmark combinations, and valid configurations to be checked against spatial constraints. It exposed relationships such as angles, distances, homing rotation, path distances, ordering, and the 2D positions of the available landmarks. Paths that intersected invalid landmark regions could invalidate the configuration, and the UI reflected whether the trial set was ready to use.</p>
+                                <p>The same 2D configuration represented the corresponding 3D simulation space, so the dashboard had to connect researcher-friendly controls with the spatial rules used by the assessment environment.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual flow: research configuration to 3D assessment</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node">Research configuration<small>landmarks placed in a 2D coordinate field</small></span></li><li><span class="cs-flow__node cs-flow__node--accent">Validation<small>spatial constraints, paths, ordering</small></span></li><li><span class="cs-flow__node">Saved trial data<small>serialized experiment configuration</small></span></li><li><span class="cs-flow__node">3D assessment<small>participant task flow and recorded results</small></span></li>
+                            </ol>
+                            <p class="cs-diagram__note">Conceptual only. The 2D configuration maps to the 3D simulation space; the specific geometric validation rules are not reproduced here.</p>
+                        </figure>
+                                <h3>Architecture approach</h3>
+                                <ul>
+                                    <li>MVP-style separation for UI-heavy workflows</li>
+                                    <li>ScriptableObjects for authored/configuration data where appropriate</li>
+                                    <li>Interfaces and services for separation of responsibilities</li>
+                                    <li>Observer/events for state changes and UI updates</li>
+                                    <li>Serialization/recording of experiment configuration and participant data</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="problem-localization" aria-labelledby="problem-localization-title">
+                                <span class="cs-kicker">Engineering problem 02</span>
+                                <h2 id="problem-localization-title">Supporting 16 languages without destroying UI usability</h2>
+                                
+                                <p>SPACE supported 16 localization languages through Unity's Localization package. Text expansion and different language lengths repeatedly changed the space required by controls, which could break readability and interaction in a dense research interface.</p>
+                                <p>Scrollable/masked text solved some usability problems but introduced rendering cost when used heavily. I therefore used masking selectively/on demand rather than leaving expensive masking behavior active throughout the interface.</p>
+                        <div class="pf-callout cs-callout" role="note">
+                            <p class="pf-callout__label">Key tradeoff</p>
+                            <p>Preserve readability across languages without accepting unnecessary rendering overhead everywhere.</p>
+                        </div>
+                            </section>
+                            <section class="cs-section" id="problem-memory" aria-labelledby="problem-memory-title">
+                                <span class="cs-kicker">Engineering problem 03</span>
+                                <h2 id="problem-memory-title">Memory pressure on iPad</h2>
+                                
+                                <p>Real 3D models, textures, meshes, multiple application modes, and transitions between configuration/gameplay states created memory pressure on iPad. Assets remaining resident across transitions could eventually contribute to out-of-memory crashes.</p>
+                                <p>I used profiling and device debugging to identify memory-heavy content, then moved significant content into local Addressables and explicit asynchronous load/unload flows. Loading screens were used where necessary to hide transitions while asset ownership was made more deliberate.</p>
+                                <h3>Implementation themes</h3>
+                                <ul>
+                                    <li>Addressables</li>
+                                    <li>Asynchronous loading/unloading</li>
+                                    <li>Explicit release/lifecycle management</li>
+                                    <li>Texture/mesh residency awareness</li>
+                                    <li>Loading screens around expensive transitions</li>
+                                    <li>Xcode crash/device debugging</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="problem-rendering" aria-labelledby="problem-rendering-title">
+                                <span class="cs-kicker">Engineering problem 04</span>
+                                <h2 id="problem-rendering-title">UI and rendering performance</h2>
+                                
+                                <p>The application was UI-heavy. A large single Canvas caused unnecessary redraw/rebuild cost as parts of the dashboard changed, so I split the interface across multiple canvases to isolate frequently changing regions.</p>
+                                <p>In the 3D environment I also addressed rendering cost through a combination of LODs, CullingGroup-based visibility decisions, batching where appropriate, texture atlasing, material-count reduction, and selective mesh combining. I used the Unity Profiler and rendering/debugging tools to validate bottlenecks rather than applying optimizations blindly.</p>
+                            </section>
+                            <section class="cs-section" id="decisions" aria-labelledby="decisions-title">
+                                <span class="cs-kicker">Tradeoffs</span>
+                                <h2 id="decisions-title">Key technical decisions</h2>
+                                
+                                <div class="cs-decisions">
+                            <article class="cs-decision">
+                                <h3><span>Decision</span>Build a researcher-facing authoring dashboard rather than hard-code trials</h3>
+                                <p><strong>Why:</strong> The research evolved over time. Giving researchers a structured way to configure and validate trials reduced the need to rewrite the application for every experimental adjustment.</p>
+                            </article>
+                            <article class="cs-decision">
+                                <h3><span>Decision</span>Rewrite modules when research requirements outgrew the original design</h3>
+                                <p><strong>Why:</strong> Preserving an unsuitable implementation would have made later experiments harder to support. Long-term research software required architecture to evolve with the study rather than accumulate patches indefinitely.</p>
+                            </article>
+                            <article class="cs-decision">
+                                <h3><span>Decision</span>Addressables and explicit lifecycle management for heavy content</h3>
+                                <p><strong>Why:</strong> Keeping content resident was not viable on the target iPad memory budget. Explicit loading/release made transitions more complex but gave the application better control over memory.</p>
+                            </article>
+                            <article class="cs-decision">
+                                <h3><span>Decision</span>Conditional UI masking</h3>
+                                <p><strong>Why:</strong> Localization required flexible/scrollable text, but always-on masking had a performance cost. Enabling it only where needed balanced usability and rendering overhead.</p>
+                            </article>
+                                </div>
+                            </section>
+                            <section class="cs-section" id="outcome" aria-labelledby="outcome-title">
+                                <span class="cs-kicker">Outcome</span>
+                                <h2 id="outcome-title">Outcome</h2>
+                                
+                                <p>SPACE progressed from a software project into a platform used across a multi-year research program and publicly documented in research publications. My contribution was leading the engineering implementation and evolution of that platform; the scientific methodology and findings belong to the research authors.</p>
+                            </section>
+                            <section class="cs-section" id="reflection" aria-labelledby="reflection-title">
+                                <span class="cs-kicker">Reflection</span>
+                                <h2 id="reflection-title">What this project represents</h2>
+                                
+                                <p>SPACE is the project that best represents my ability to own a system for years rather than only deliver an isolated feature. The hardest part was not any single Unity API. It was repeatedly translating research requirements into software while keeping the application usable, maintainable, performant, and stable on constrained hardware.</p>
+                            </section>
+                            <section class="cs-section" id="evidence" aria-labelledby="evidence-title">
+                                <span class="cs-kicker">Media</span>
+                                <h2 id="evidence-title">Media &amp; external evidence</h2>
+                                
+                        <figure class="cs-figure">
+                            <a class="cs-video" href="https://www.youtube.com/watch?v=cHxbhemqbnA" target="_blank" rel="noopener"
+                                data-youtube-id="cHxbhemqbnA" data-title="SPACE demo video">
+                                <img src="../../images/folio/Space.jpg" srcset="../../images/folio/Space.jpg 750w, ../../images/folio/Space@2x.jpg 1500w"
+                                    sizes="(max-width: 1000px) 92vw, 780px" width="750" height="563" loading="lazy" alt="">
+                                <span class="cs-video__play">Play video<span class="u-screen-reader-text">: SPACE demo video</span></span>
+                            </a>
+                            <figcaption>SPACE demo video. The YouTube player loads only when you press play.</figcaption>
+                        </figure>
+                                <ul>
+                                    <li><a class="ext-link" href="https://www.youtube.com/watch?v=cHxbhemqbnA" target="_blank" rel="noopener">Demo video on YouTube<span class="u-screen-reader-text"> (opens in new tab)</span></a></li>
+                                    <li><a class="ext-link" href="https://www.sciencedirect.com/science/article/pii/S0747563224002176" target="_blank" rel="noopener">Research paper on ScienceDirect<span class="u-screen-reader-text"> (opens in new tab)</span></a> — the scientific work is the authors’; I led engineering of the software platform used in the research.</li>
+                                </ul>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../case-studies/gi-joe-multiplayer/"><span>Next case study</span>G.I. Joe: Wrath of Cobra — Photon Fusion multiplayer</a><a href="../../case-studies/pro-golf-personalisation/"><span>Case study</span>Pro Golf — progressive personalisation loading</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../ZeeshanQaswar-Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span><a href="mailto:xeeshanqaswar@gmail.com">xeeshanqaswar@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>

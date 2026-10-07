@@ -1,0 +1,1382 @@
+/* ===================================================================
+ * Portfolio components
+ * Layered on top of the Hudson theme (styles.css). Reuses its colour,
+ * spacing and type tokens so the existing identity stays recognisable.
+ *
+ * TOC:
+ * # TOKENS
+ * # ACCESSIBILITY & GLOBAL TWEAKS
+ * # SHARED (section head, tags, chips, callouts, external links)
+ * # HOME: hero, evidence strip, capabilities, case-study cards,
+ *         production work, earlier projects, how I work, about
+ * # CASE STUDY: hero, meta, layout, toc, article, ownership,
+ *         decisions, diagrams, media, next links
+ * ------------------------------------------------------------------- */
+
+
+/* ===================================================================
+ * # TOKENS
+ * ------------------------------------------------------------------- */
+:root {
+    --font-read: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --pf-surface: var(--color-white);
+    --pf-border: rgba(0, 0, 0, 0.1);
+    --pf-radius: 6px;
+    --pf-accent-on-dark: #8fd0dc;
+    --pf-text: #2f3036;
+    --pf-text-soft: #55575f;
+}
+
+
+/* ===================================================================
+ * # ACCESSIBILITY & GLOBAL TWEAKS
+ * ------------------------------------------------------------------- */
+.skip-link {
+    position: absolute;
+    left: 1.6rem;
+    top: -100px;
+    z-index: 1000;
+    background: var(--color-1);
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.8rem 1.6rem;
+}
+
+.skip-link:focus {
+    top: 1.6rem;
+    color: white;
+}
+
+a:focus-visible,
+.btn:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 3px solid var(--color-1-light);
+    outline-offset: 3px;
+}
+
+/* better contrast for nav links on the dark header bar */
+.s-header__menu-links a {
+    color: var(--color-gray-12);
+}
+
+.s-header__menu-links a:hover,
+.s-header__menu-links a:focus-visible {
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .btn {
+        white-space: normal;
+        height: auto;
+        min-height: var(--btn-height);
+        line-height: 1.5;
+        padding: 1.4rem 2rem;
+        letter-spacing: 0.2em;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cs-doc {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+
+/* ===================================================================
+ * # SHARED
+ * ------------------------------------------------------------------- */
+
+/* section head (eyebrow + heading + intro) */
+.pf-head {
+    position: relative;
+    max-width: 920px;
+    margin-bottom: var(--vspace-2);
+}
+
+.pf-head[data-num]::before {
+    content: attr(data-num);
+    font-family: var(--font-1);
+    font-weight: 600;
+    font-size: 16rem;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: var(--color-gray-11);
+    opacity: 0.5;
+    position: absolute;
+    top: -0.32em;
+    left: -0.08em;
+    pointer-events: none;
+}
+
+.pf-head .text-pretitle {
+    position: relative;
+    margin-bottom: var(--vspace-0_25);
+    font-size: 1.5rem;
+}
+
+.pf-head__title {
+    position: relative;
+    font-size: clamp(3rem, 3.6vw, 4.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pf-head__intro {
+    position: relative;
+    font-size: 1.9rem;
+    line-height: 1.7;
+    color: var(--color-3);
+    margin-top: var(--vspace-0_75);
+    margin-bottom: 0;
+    max-width: 52em;
+}
+
+.pf-head--light .pf-head__title {
+    color: white;
+}
+
+.pf-head--light[data-num]::before {
+    color: rgba(255, 255, 255, 0.12);
+    opacity: 1;
+}
+
+.pf-head--light .text-pretitle {
+    color: var(--pf-accent-on-dark);
+}
+
+.pf-head--light .pf-head__intro {
+    color: var(--color-gray-11);
+}
+
+/* capability tags (non-interactive) */
+.pf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pf-tags li {
+    margin: 0;
+    padding: 0.2rem 1rem;
+    font-size: 1.3rem;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    background: var(--color-gray-10);
+    color: var(--color-3);
+    border-radius: 3px;
+}
+
+.pf-tags--dark li {
+    background: rgba(255, 255, 255, 0.09);
+    color: var(--color-gray-10);
+}
+
+/* chip links (evidence links) */
+.pf-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.8rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pf-chips li {
+    margin: 0;
+    padding: 0;
+}
+
+.pf-chips__label {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-right: 0.4rem;
+}
+
+.pf-chip {
+    display: inline-block;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    padding: 0.3rem 1.2rem;
+    border: 1px solid var(--color-1);
+    border-radius: 999px;
+    color: var(--color-1);
+}
+
+.pf-chip:hover,
+.pf-chip:focus-visible {
+    background: var(--color-1);
+    color: white;
+}
+
+/* inline call-to-action link */
+.pf-cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+    letter-spacing: 0.03em;
+    color: var(--color-1);
+}
+
+.pf-cta-link::after {
+    content: "→";
+    transition: transform 0.2s;
+}
+
+.pf-cta-link:hover::after {
+    transform: translateX(4px);
+}
+
+/* external link indicator */
+.ext-link::after {
+    content: "\2197";
+    display: inline-block;
+    margin-left: 0.3em;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+/* callouts */
+.pf-callout {
+    background: var(--pf-surface);
+    border-left: 3px solid var(--color-1);
+    border-radius: 0 var(--pf-radius) var(--pf-radius) 0;
+    padding: var(--vspace-1) var(--vspace-1_25);
+}
+
+.pf-callout__label,
+.pf-callout .pf-callout__label {
+    font-family: var(--font-1);
+    font-weight: 600;
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-1);
+    margin: 0 0 0.6rem;
+}
+
+.pf-callout p {
+    margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.65;
+    color: var(--pf-text);
+}
+
+/* card */
+.pf-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-radius: var(--pf-radius);
+    padding: var(--vspace-1_25);
+}
+
+.pf-card__kicker,
+.pf-card .pf-card__kicker {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-1);
+    margin: 0;
+}
+
+.pf-card__title {
+    font-size: clamp(2.2rem, 2vw, 2.6rem);
+    line-height: 1.25;
+    font-weight: 600;
+    margin: var(--vspace-0_25) 0 var(--vspace-0_5);
+}
+
+.pf-card__title a {
+    color: inherit;
+}
+
+.pf-card__title a:hover {
+    color: var(--color-1);
+}
+
+.pf-card p {
+    font-size: 1.75rem;
+    line-height: 1.65;
+    color: var(--pf-text-soft);
+    margin-bottom: var(--vspace-0_75);
+}
+
+.pf-card__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--vspace-0_5);
+}
+
+
+/* ===================================================================
+ * # HOME
+ * ------------------------------------------------------------------- */
+
+/* hero additions */
+.s-intro__content-desc {
+    font-size: clamp(1.8rem, 1.4vw, 2.2rem);
+    line-height: 1.6;
+    color: var(--color-3);
+    max-width: 34em;
+    margin: 0;
+    transition: opacity 0.6s cubic-bezier(0.28, 0.12, 0.22, 1) 0.5s, transform 0.6s cubic-bezier(0.28, 0.12, 0.22, 1) 0.5s;
+    opacity: 0;
+    transform: translateY(150px);
+}
+
+.ss-show .s-intro__content-desc,
+.no-js .s-intro__content-desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.s-intro__content-title {
+    font-family: var(--font-2);
+    font-weight: 700;
+    margin-bottom: var(--vspace-0_75);
+}
+
+.s-intro__content-btns {
+    margin-top: var(--vspace-1_5);
+}
+
+/* below 1080px the theme places the hero text over the photo */
+@media screen and (max-width: 1080px) {
+    .s-intro__content-desc {
+        margin: 0 auto;
+        color: rgba(255, 255, 255, 0.92);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    }
+
+    .s-intro__content-pretitle {
+        color: var(--color-gray-10);
+    }
+
+    .s-intro__content-media::before {
+        z-index: 3;
+        background: rgba(0, 0, 0, 0.45);
+    }
+}
+
+/* sections */
+.pf-section {
+    padding-top: var(--vspace-5);
+    padding-bottom: var(--vspace-1);
+}
+
+.pf-section--alt {
+    background: var(--color-gray-10);
+    margin-top: var(--vspace-4);
+    padding-bottom: var(--vspace-4);
+}
+
+@media screen and (max-width: 800px) {
+    .pf-section {
+        padding-top: var(--vspace-3_5);
+    }
+
+    .pf-section--alt {
+        margin-top: var(--vspace-3);
+        padding-bottom: var(--vspace-3);
+    }
+}
+
+/* evidence strip */
+.pf-evidence {
+    background: var(--color-3);
+    color: var(--color-gray-11);
+    padding: var(--vspace-1) 0;
+}
+
+.pf-evidence__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pf-evidence__item {
+    margin: 0;
+    padding: var(--vspace-0_5) var(--gutter);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 1.6rem;
+    line-height: 1.45;
+    color: white;
+}
+
+.pf-evidence__item:first-child {
+    border-left: 0;
+}
+
+.pf-evidence__item::before {
+    content: "";
+    display: block;
+    width: 2.4rem;
+    height: 2px;
+    background: var(--pf-accent-on-dark);
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+    .pf-evidence__list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pf-evidence__item,
+    .pf-evidence__item:first-child {
+        border-left: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .pf-evidence__list {
+        grid-template-columns: 1fr;
+    }
+
+    .pf-evidence__item {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* capabilities */
+.pf-cap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--gutter) * 1.5);
+}
+
+@media screen and (max-width: 900px) {
+    .pf-cap-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* featured case studies */
+.pf-cases {
+    display: grid;
+    gap: var(--vspace-1_5);
+}
+
+.pf-case {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-radius: var(--pf-radius);
+    overflow: hidden;
+}
+
+.pf-case__media {
+    display: block;
+    background: var(--color-gray-11);
+}
+
+.pf-case__media img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    margin: 0;
+    vertical-align: bottom;
+    transition: opacity 0.3s;
+}
+
+.pf-case__media:hover img {
+    opacity: 0.88;
+}
+
+.pf-case__body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--vspace-1_5) calc(var(--gutter) * 2);
+}
+
+.pf-case__title {
+    font-size: clamp(2.6rem, 2.4vw, 3.4rem);
+    line-height: 1.2;
+    font-weight: 600;
+    margin: var(--vspace-0_25) 0 var(--vspace-0_5);
+}
+
+.pf-case__title a {
+    color: inherit;
+}
+
+.pf-case__title a:hover {
+    color: var(--color-1);
+}
+
+.pf-case__copy {
+    font-size: 1.8rem;
+    line-height: 1.65;
+    color: var(--pf-text-soft);
+    margin-bottom: var(--vspace-0_75);
+}
+
+.pf-case__footer {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vspace-0_5);
+}
+
+@media screen and (max-width: 900px) {
+    .pf-case {
+        grid-template-columns: 1fr;
+    }
+
+    .pf-case__media img {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+
+    .pf-case__body {
+        padding: var(--vspace-1) var(--vspace-1) var(--vspace-1_25);
+    }
+}
+
+/* production work */
+.pf-work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--gutter) * 1.5);
+}
+
+@media screen and (max-width: 900px) {
+    .pf-work-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* earlier projects (compact) */
+.pf-earlier {
+    margin-top: var(--vspace-3);
+    padding-top: var(--vspace-1_5);
+    border-top: 1px solid var(--pf-border);
+}
+
+.pf-earlier__title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+}
+
+.pf-earlier__intro {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.pf-earlier__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: var(--vspace-0_75) calc(var(--gutter) * 1.5);
+    list-style: none;
+    margin: var(--vspace-1) 0 0;
+    padding: 0;
+}
+
+.pf-earlier__item {
+    display: flex;
+    gap: 1.4rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.pf-earlier__item img {
+    flex: none;
+    width: 96px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.pf-earlier__name {
+    display: block;
+    font-weight: 600;
+    font-size: 1.7rem;
+    line-height: 1.3;
+    color: var(--color-text-dark);
+}
+
+.pf-earlier__meta {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: var(--color-text-light);
+}
+
+.pf-earlier__links {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.pf-earlier__links a + a {
+    margin-left: 1rem;
+}
+
+/* how I work */
+.pf-how {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: calc(var(--gutter) * 3);
+    align-items: start;
+}
+
+.pf-prose p {
+    font-size: 1.9rem;
+    line-height: 1.7;
+    color: var(--color-3);
+}
+
+.pf-checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--pf-border);
+}
+
+.pf-checklist li {
+    position: relative;
+    margin: 0;
+    padding: 1.2rem 0 1.2rem 2.8rem;
+    border-bottom: 1px solid var(--pf-border);
+    font-size: 1.7rem;
+    line-height: 1.45;
+    color: var(--color-text-dark);
+}
+
+.pf-checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2.1rem;
+    width: 1.4rem;
+    height: 2px;
+    background: var(--color-1);
+}
+
+.pf-ai {
+    margin-top: var(--vspace-2);
+    max-width: 880px;
+}
+
+@media screen and (max-width: 900px) {
+    .pf-how {
+        grid-template-columns: 1fr;
+        gap: var(--vspace-1);
+    }
+}
+
+/* about */
+.pf-about .s-about__blocks {
+    margin-top: var(--vspace-2);
+}
+
+.pf-about .s-about__list li {
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+
+/* contact footer additions */
+.s-footer__lead {
+    font-size: 1.9rem;
+    line-height: 1.7;
+    color: var(--color-gray-11);
+    max-width: 42em;
+}
+
+.s-footer h3 {
+    color: white;
+    margin-top: 0;
+}
+
+.s-footer .link-list a {
+    color: var(--color-gray-12);
+}
+
+.s-footer__buttons {
+    margin-bottom: var(--vspace-1_5);
+}
+
+.s-footer__buttons .column {
+    margin-bottom: var(--vspace-0_5);
+}
+
+.s-footer .ss-copyright span,
+.s-footer .ss-copyright a {
+    color: var(--color-gray-13);
+}
+
+.s-footer__social svg path,
+.s-footer__social svg circle {
+    fill: var(--color-gray-13);
+}
+
+
+/* ===================================================================
+ * # CASE STUDY
+ * ------------------------------------------------------------------- */
+
+/* hero */
+.cs-hero {
+    background: var(--color-3);
+    color: var(--color-gray-11);
+    padding-top: calc(72px + var(--vspace-4));
+    padding-bottom: var(--vspace-2_5);
+}
+
+.cs-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 0 0 var(--vspace-1);
+    padding: 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+}
+
+.cs-breadcrumb li {
+    margin: 0;
+    padding: 0;
+    color: var(--color-gray-12);
+}
+
+.cs-breadcrumb li + li::before {
+    content: "/";
+    margin-right: 0.6rem;
+    color: var(--color-gray-15);
+}
+
+.cs-breadcrumb a {
+    color: var(--color-gray-12);
+}
+
+.cs-breadcrumb a:hover {
+    color: white;
+}
+
+.cs-hero .text-pretitle {
+    color: var(--pf-accent-on-dark);
+    font-size: 1.5rem;
+    margin-bottom: var(--vspace-0_25);
+}
+
+.cs-hero__title {
+    color: white;
+    font-size: clamp(3.2rem, 4.2vw, 6rem);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    font-weight: 600;
+    margin: 0 0 var(--vspace-0_75);
+    max-width: 22em;
+}
+
+.cs-hero__subtitle {
+    font-size: clamp(1.9rem, 1.6vw, 2.3rem);
+    line-height: 1.55;
+    color: var(--color-gray-10);
+    max-width: 46em;
+    margin-bottom: var(--vspace-1_5);
+}
+
+.cs-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: var(--vspace-0_75) calc(var(--gutter) * 2);
+    margin: 0 0 var(--vspace-1);
+    padding: var(--vspace-1) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.cs-meta div {
+    margin: 0;
+}
+
+.cs-meta dt {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-gray-13);
+    margin: 0;
+}
+
+.cs-meta dd {
+    margin: 0.3rem 0 0;
+    font-size: 1.7rem;
+    line-height: 1.45;
+    color: white;
+}
+
+.cs-hero__summary {
+    font-family: var(--font-read);
+    font-size: 1.8rem;
+    line-height: 1.7;
+    color: var(--color-gray-10);
+    max-width: 48em;
+    margin: var(--vspace-1) 0;
+}
+
+.cs-hero__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vspace-0_75);
+}
+
+.cs-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cs-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.cs-links a {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--pf-accent-on-dark);
+}
+
+.cs-links a:hover {
+    color: white;
+}
+
+/* body layout */
+.cs-body {
+    padding: var(--vspace-3) 0 var(--vspace-4);
+}
+
+.cs-layout {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: calc(var(--gutter) * 3);
+    align-items: start;
+}
+
+/* table of contents */
+.cs-toc {
+    position: sticky;
+    top: 10rem;
+    font-size: 1.5rem;
+}
+
+.cs-toc__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-light);
+    margin: 0 0 0.8rem;
+}
+
+.cs-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--pf-border);
+}
+
+.cs-toc li {
+    margin: 0;
+    padding: 0;
+}
+
+.cs-toc a {
+    display: block;
+    margin-left: -1px;
+    padding: 0.5rem 0 0.5rem 1.4rem;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+    color: var(--color-3);
+}
+
+.cs-toc a:hover,
+.cs-toc a.is-active {
+    color: var(--color-1);
+    border-left-color: var(--color-1);
+}
+
+@media screen and (max-width: 1000px) {
+    .cs-layout {
+        grid-template-columns: 1fr;
+        gap: var(--vspace-1_5);
+    }
+
+    .cs-toc {
+        position: static;
+        background: var(--pf-surface);
+        border: 1px solid var(--pf-border);
+        border-radius: var(--pf-radius);
+        padding: var(--vspace-0_75) var(--vspace-1);
+    }
+}
+
+/* article typography */
+.cs-article {
+    max-width: 780px;
+    font-family: var(--font-read);
+    color: var(--pf-text);
+}
+
+.cs-article p,
+.cs-article li {
+    font-size: 1.8rem;
+    line-height: 1.75;
+}
+
+.cs-article p {
+    margin-bottom: 2.4rem;
+}
+
+.cs-article ul {
+    margin: 0 0 2.4rem 2.2rem;
+}
+
+.cs-article li {
+    margin-bottom: 0.6rem;
+}
+
+.cs-article h2,
+.cs-article h3 {
+    color: var(--color-text-dark);
+}
+
+.cs-article h2 {
+    font-size: clamp(2.6rem, 2.6vw, 3.4rem);
+    line-height: 1.22;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: var(--vspace-0_75);
+}
+
+.cs-article h3 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    font-weight: 600;
+    margin-top: var(--vspace-1_5);
+    margin-bottom: var(--vspace-0_5);
+}
+
+.cs-section {
+    padding-top: var(--vspace-2);
+    scroll-margin-top: 9rem;
+}
+
+.cs-section:first-child {
+    padding-top: 0;
+}
+
+.cs-kicker {
+    display: block;
+    font-family: var(--font-1);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-1);
+    margin-bottom: 0.4rem;
+}
+
+.cs-article code {
+    font-size: 0.9em;
+    background: var(--color-gray-10);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+}
+
+/* ownership block */
+.cs-ownership {
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-top: 4px solid var(--color-1);
+    border-radius: var(--pf-radius);
+    padding: var(--vspace-1_25);
+}
+
+.cs-ownership h2 {
+    margin-top: 0;
+}
+
+.cs-ownership__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--vspace-1);
+    margin-top: var(--vspace-0_75);
+}
+
+.cs-ownership__cols h3 {
+    margin-top: 0;
+    font-family: var(--font-1);
+    font-size: 1.35rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-1);
+}
+
+.cs-ownership__cols ul {
+    margin-bottom: 0;
+}
+
+.cs-ownership__cols li {
+    font-size: 1.65rem;
+    line-height: 1.55;
+}
+
+.cs-ownership__boundary {
+    align-self: start;
+    background: var(--color-gray-9);
+    border-radius: 4px;
+    padding: var(--vspace-0_75);
+}
+
+.cs-ownership__boundary h3 {
+    color: var(--color-3);
+}
+
+@media screen and (max-width: 700px) {
+    .cs-ownership {
+        padding: var(--vspace-1);
+    }
+
+    .cs-ownership__cols {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* technical callouts */
+.cs-callout {
+    margin: 0 0 2.4rem;
+}
+
+.cs-callout--note {
+    border-left-color: var(--color-gray-14);
+    background: var(--color-gray-8);
+}
+
+.cs-callout--note .pf-callout__label {
+    color: var(--color-3);
+}
+
+/* decisions */
+.cs-decisions {
+    display: grid;
+    gap: var(--vspace-0_75);
+}
+
+.cs-decision {
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-radius: var(--pf-radius);
+    padding: var(--vspace-1) var(--vspace-1_25);
+}
+
+.cs-decision h3 {
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.cs-decision h3 span {
+    display: block;
+    font-family: var(--font-1);
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-1);
+    margin-bottom: 0.4rem;
+}
+
+.cs-decision p {
+    margin-bottom: 0;
+}
+
+/* diagrams */
+.cs-diagram {
+    margin: var(--vspace-1) 0 var(--vspace-1_5);
+    padding: var(--vspace-1);
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-radius: var(--pf-radius);
+}
+
+.cs-diagram figcaption {
+    font-family: var(--font-1);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-light);
+    margin: 0 0 1.2rem;
+}
+
+.cs-diagram__note {
+    font-size: 1.45rem !important;
+    line-height: 1.55 !important;
+    color: var(--pf-text-soft);
+    margin: 1.2rem 0 0 !important;
+}
+
+.cs-flow {
+    display: flex;
+    list-style: none;
+    margin: 0 !important;
+    padding: 0;
+}
+
+.cs-flow li {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1.35;
+}
+
+.cs-flow li + li::before {
+    content: "\2192";
+    flex: none;
+    align-self: center;
+    padding: 0 0.6rem;
+    color: var(--color-1);
+    font-size: 1.8rem;
+}
+
+.cs-flow__node {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 1.2rem 1rem;
+    background: var(--color-gray-9);
+    border: 1px solid var(--pf-border);
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+.cs-flow__node small {
+    display: block;
+    margin-top: 0.3rem;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: var(--pf-text-soft);
+}
+
+.cs-flow__node--accent {
+    background: var(--color-1);
+    border-color: var(--color-1);
+    color: white;
+}
+
+.cs-flow__node--accent small {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* vertical variant for longer pipelines */
+.cs-flow--vertical {
+    flex-direction: column;
+    max-width: 560px;
+    margin: 0 auto !important;
+}
+
+.cs-flow--vertical li {
+    flex-direction: column;
+}
+
+.cs-flow--vertical li + li::before {
+    content: "\2193";
+    align-self: center;
+    padding: 0.3rem 0;
+}
+
+.cs-flow--vertical .cs-flow__node {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 1rem;
+}
+
+.cs-flow--vertical .cs-flow__node small {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 760px) {
+    .cs-flow {
+        flex-direction: column;
+    }
+
+    .cs-flow li {
+        flex-direction: column;
+    }
+
+    .cs-flow li + li::before {
+        content: "\2193";
+        padding: 0.3rem 0;
+    }
+}
+
+/* media */
+.cs-figure {
+    margin: var(--vspace-1) 0 var(--vspace-1_5);
+}
+
+.cs-figure img {
+    width: 100%;
+    border-radius: var(--pf-radius);
+    margin: 0;
+    vertical-align: bottom;
+}
+
+.cs-figure figcaption {
+    font-size: 1.45rem;
+    line-height: 1.5;
+    color: var(--pf-text-soft);
+    margin-top: 0.8rem;
+}
+
+.cs-video {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    border-radius: var(--pf-radius);
+    overflow: hidden;
+}
+
+.cs-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.cs-video:hover img {
+    opacity: 1;
+}
+
+.cs-video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.72);
+    color: white;
+    font-family: var(--font-1);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 1.2rem 2rem;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.cs-video__play::before {
+    content: "";
+    border-style: solid;
+    border-width: 0.6em 0 0.6em 1em;
+    border-color: transparent transparent transparent white;
+}
+
+.cs-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* next / previous case studies */
+.cs-next {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(var(--gutter) * 1.5);
+    margin-top: var(--vspace-3);
+    padding-top: var(--vspace-1_5);
+    border-top: 1px solid var(--pf-border);
+}
+
+.cs-next a {
+    display: block;
+    background: var(--pf-surface);
+    border: 1px solid var(--pf-border);
+    border-radius: var(--pf-radius);
+    padding: var(--vspace-0_75) var(--vspace-1);
+    color: var(--color-text-dark);
+    font-family: var(--font-1);
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.cs-next a:hover {
+    border-color: var(--color-1);
+    color: var(--color-1);
+}
+
+.cs-next span {
+    display: block;
+    font-size: 1.25rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    margin-bottom: 0.4rem;
+}
+
+@media screen and (max-width: 700px) {
+    .cs-next {
+        grid-template-columns: 1fr;
+    }
+}

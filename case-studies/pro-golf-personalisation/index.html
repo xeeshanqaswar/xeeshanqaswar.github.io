@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pro Golf Personalisation Case Study — Unity Addressables &amp; Asset Lifecycle | Zeeshan Qaswar</title>
+    <meta name="description" content="Engineering case study on architecting a Unity personalisation system with progressive animated-content loading, Addressables, API state, memory management, and navigation-aware preloading.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/case-studies/pro-golf-personalisation/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="Pro Golf — Progressive Personalisation Loading for a Live Unity Product">
+    <meta property="og:description" content="Engineering case study on architecting a Unity personalisation system with progressive animated-content loading, Addressables, API state, memory management, and navigation-aware preloading.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/case-studies/pro-golf-personalisation/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/folio/ProGolf@2x.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="Pro Golf — Progressive Personalisation Loading for a Live Unity Product">
+    <meta name="twitter:description" content="Engineering case study on architecting a Unity personalisation system with progressive animated-content loading, Addressables, API state, memory management, and navigation-aware preloading.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/folio/ProGolf@2x.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li class="current"><a href="../../index.html#case-studies" aria-current="page">Case Studies</a></li>
+                        <li><a href="../../index.html#work">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li>
+                        <li><a href="../../ZeeshanQaswar-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                            <li aria-current="page">Pro Golf personalisation</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Engineering case study</p>
+                    <h1 class="cs-hero__title">Pro Golf — Progressive Personalisation Loading for a Live Unity Product</h1>
+                    <p class="cs-hero__subtitle">Architecture and asset-lifecycle work for a content-heavy personalisation system where responsiveness, memory residency, and download size competed with one another.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Senior Software Engineer</dd></div><div><dt>Scope</dt><dd>Personalisation module</dd></div><div><dt>Team context</dt><dd>Architecture reviewed by my lead</dd></div><div><dt>Platform</dt><dd>Mobile (iOS)</dd></div><div><dt>Context</dt><dd>Live Unity product</dd></div></dl>
+
+                    <p class="cs-hero__summary">Architected a production personalisation module that balanced large animated avatar content, API-driven inventory state, Addressables, progressive loading, memory residency, and perceived responsiveness across a live Unity product.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>Architecture</li><li>Addressables</li><li>Memory</li><li>Progressive Loading</li></ul>
+                        <ul class="cs-links"><li><a class="ext-link" href="https://apps.apple.com/us/app/pro-golf-real-cash/id6449768318" target="_blank" rel="noopener">App Store<span class="u-screen-reader-text"> (opens in new tab)</span></a></li></ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#context">Context</a></li><li><a href="#responsibility">My responsibility</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#problem-responsive">Feeling immediate</a></li><li><a href="#problem-navigation">Navigation-aware preload</a></li><li><a href="#problem-state">State vs. presentation</a></li><li><a href="#highlights">Implementation highlights</a></li><li><a href="#outcome">Outcome</a></li><li><a href="#reflection">Reflection</a></li><li><a href="#evidence">Media &amp; evidence</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="context" aria-labelledby="context-title">
+                                <span class="cs-kicker">Context</span>
+                                <h2 id="context-title">Heavy identity content in a live mobile product</h2>
+                                
+                                <p>Pro Golf included a substantial personalisation experience around avatars and other player identity content. The system had to connect API/inventory state with Unity UI and large visual assets while remaining responsive on mobile hardware.</p>
+                                <p>Animated avatar content was particularly expensive: an avatar could have multiple idle, win, and lose animations. Treating all of that content as an always-loaded package would increase download time and memory residency.</p>
+                            </section>
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>I architected and implemented the Personalisation module, with the architecture reviewed by my lead. My ownership included the Unity-side UI architecture, services/data flow, API/DTO integration, asset catalog and Addressables behavior, and the progressive loading strategy for heavy animated content.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>What I owned</h3>
+                                <ul><li>Personalisation module architecture and implementation</li><li>Unity-side UI architecture</li><li>Services/data flow and API/DTO integration</li><li>Asset catalog and Addressables behavior</li><li>Progressive loading strategy for heavy animated content</li></ul>
+                            </div>
+                                <div class="cs-ownership__boundary">
+                                    <h3>Review</h3>
+                                    <ul><li>The module architecture was reviewed by my lead.</li></ul>
+                                </div>
+                        </div>
+                    </section>
+                            <section class="cs-section" id="architecture" aria-labelledby="architecture-title">
+                                <span class="cs-kicker">Architecture</span>
+                                <h2 id="architecture-title">Separating presentation, state, and assets</h2>
+                                
+                                <p>The module has two related paths: a code path that keeps UI independent of API details, and an asset path that decides what content is resident at any time.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual code path</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node">UI / View</span></li><li><span class="cs-flow__node">Presenter</span></li><li><span class="cs-flow__node cs-flow__node--accent">Facade</span></li><li><span class="cs-flow__node">Services / DTO data</span></li><li><span class="cs-flow__node">API / backend integration</span></li>
+                            </ol>
+                            
+                        </figure>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual asset path</figcaption>
+                            <ol class="cs-flow cs-flow--vertical">
+                                <li><span class="cs-flow__node">Personalisation metadata</span></li><li><span class="cs-flow__node cs-flow__node--accent">Preview image<small>shown immediately</small></span></li><li><span class="cs-flow__node">First playable animation</span></li><li><span class="cs-flow__node">Progressive background downloads<small>remaining animations</small></span></li><li><span class="cs-flow__node">Release / unload<small>based on navigation</small></span></li>
+                            </ol>
+                            
+                        </figure>
+                                <h3>Architecture themes</h3>
+                                <ul>
+                                    <li>MVP, interfaces, and a facade over services</li>
+                                    <li>Dependency injection to supply dependencies; services, interfaces, facades, and events provide the collaboration boundaries</li>
+                                    <li>DTO/API integration</li>
+                                    <li>ScriptableObject-authored/catalog data where appropriate</li>
+                                    <li>Addressables</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="problem-responsive" aria-labelledby="problem-responsive-title">
+                                <span class="cs-kicker">Engineering problem 01</span>
+                                <h2 id="problem-responsive-title">Make heavy personalisation feel immediate</h2>
+                                
+                                <p>Waiting for every animation asset before showing the selected avatar would create a poor user experience. Keeping every animation resident would create a memory problem.</p>
+                                <p>The loading strategy therefore prioritized perceived responsiveness. A lightweight preview/still image could appear immediately. The system then downloaded enough content to begin animation playback, while additional animations continued loading progressively in the background.</p>
+                        <div class="pf-callout cs-callout" role="note">
+                            <p class="pf-callout__label">Key tradeoff</p>
+                            <p>First-use responsiveness vs. content completeness vs. memory/download cost.</p>
+                        </div>
+                            </section>
+                            <section class="cs-section" id="problem-navigation" aria-labelledby="problem-navigation-title">
+                                <span class="cs-kicker">Engineering problem 02</span>
+                                <h2 id="problem-navigation-title">Use navigation time as preload time</h2>
+                                
+                                <p>The product flow gave the system opportunities to prepare content before the user reached Personalisation. During navigation such as Home → Wallet → Personalisation, the intermediate screen could be used as a background preload window.</p>
+                                <p>The reverse path was also meaningful: moving away from Personalisation toward Home provided a point where heavy content could be released rather than allowed to accumulate in memory.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Navigation-aware preloading</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node">Home</span></li><li><span class="cs-flow__node cs-flow__node--accent">Wallet<small>background preload window</small></span></li><li><span class="cs-flow__node">Personalisation<small>content ready or arriving</small></span></li>
+                            </ol>
+                            <p class="cs-diagram__note">On the way back toward Home, heavy content can be released instead of accumulating in memory.</p>
+                        </figure>
+                                <p>This made asset lifecycle part of navigation architecture rather than a collection of isolated <code>LoadAssetAsync</code> calls.</p>
+                            </section>
+                            <section class="cs-section" id="problem-state" aria-labelledby="problem-state-title">
+                                <span class="cs-kicker">Engineering problem 03</span>
+                                <h2 id="problem-state-title">Keep API/player state separate from presentation</h2>
+                                
+                                <p>Personalisation state depended on player inventory, purchases, catalog metadata, and backend/API responses. The module used presenters, a facade, services, interfaces, and DTO boundaries so that UI behavior did not become tightly coupled to API implementation details.</p>
+                                <p>That separation also made the system easier to integrate into other product surfaces such as tournaments and leaderboards.</p>
+                            </section>
+                            <section class="cs-section" id="highlights" aria-labelledby="highlights-title">
+                                <span class="cs-kicker">Implementation</span>
+                                <h2 id="highlights-title">Implementation highlights</h2>
+                                
+                                <ul>
+                                    <li>Player inventory/purchase state</li>
+                                    <li>DTO/API communication</li>
+                                    <li>Avatar/banner/title-style personalisation content</li>
+                                    <li>Addressables-based asset loading</li>
+                                    <li>Preview-first rendering</li>
+                                    <li>Progressive animation loading</li>
+                                    <li>Navigation-aware preloading</li>
+                                    <li>Explicit release/unload behavior</li>
+                                    <li>Cross-product integration</li>
+                                    <li>MVP / facade / services / interfaces / DI</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="outcome" aria-labelledby="outcome-title">
+                                <span class="cs-kicker">Outcome</span>
+                                <h2 id="outcome-title">Outcome</h2>
+                                
+                                <p>The system provided a production architecture for content-heavy personalisation while balancing responsiveness, memory residency, and asset download cost.</p>
+                            </section>
+                            <section class="cs-section" id="reflection" aria-labelledby="reflection-title">
+                                <span class="cs-kicker">Reflection</span>
+                                <h2 id="reflection-title">Asset loading is a product decision</h2>
+                                
+                                <p>The important lesson was that asset loading is a product-design problem as much as a technical one. The best loading strategy depended on where the user was going, what they needed to see immediately, and what content could safely arrive later or leave memory entirely.</p>
+                            </section>
+                            <section class="cs-section" id="evidence" aria-labelledby="evidence-title">
+                                <span class="cs-kicker">Media</span>
+                                <h2 id="evidence-title">Media &amp; external evidence</h2>
+                                
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/ProGolf.jpg" srcset="../../images/folio/ProGolf.jpg 750w, ../../images/folio/ProGolf@2x.jpg 1500w"
+                                        sizes="(max-width: 1000px) 92vw, 780px" width="750" height="563" loading="lazy"
+                                        alt="Pro Golf promotional artwork">
+                                    <figcaption>Pro Golf product artwork.</figcaption>
+                                </figure>
+                                <ul>
+                                    <li><a class="ext-link" href="https://apps.apple.com/us/app/pro-golf-real-cash/id6449768318" target="_blank" rel="noopener">Pro Golf on the App Store<span class="u-screen-reader-text"> (opens in new tab)</span></a></li>
+                                </ul>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../case-studies/space/"><span>Next case study</span>SPACE — research-grade spatial assessment platform</a><a href="../../case-studies/gi-joe-multiplayer/"><span>Case study</span>G.I. Joe: Wrath of Cobra — Photon Fusion multiplayer</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../ZeeshanQaswar-Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span><a href="mailto:xeeshanqaswar@gmail.com">xeeshanqaswar@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>

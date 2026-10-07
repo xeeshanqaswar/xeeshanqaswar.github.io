@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>G.I. Joe Multiplayer Case Study — Photon Fusion | Zeeshan Qaswar</title>
+    <meta name="description" content="Engineering case study on adapting an existing Unity action game for Photon Fusion multiplayer, including authority, networked AI/state, host migration, and offline continuity.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/case-studies/gi-joe-multiplayer/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="G.I. Joe: Wrath of Cobra — Adapting an Existing Action Game for Multiplayer with Photon Fusion">
+    <meta property="og:description" content="Engineering case study on adapting an existing Unity action game for Photon Fusion multiplayer, including authority, networked AI/state, host migration, and offline continuity.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/case-studies/gi-joe-multiplayer/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/folio/Cobra@2x.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="G.I. Joe: Wrath of Cobra — Adapting an Existing Action Game for Multiplayer with Photon Fusion">
+    <meta name="twitter:description" content="Engineering case study on adapting an existing Unity action game for Photon Fusion multiplayer, including authority, networked AI/state, host migration, and offline continuity.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/folio/Cobra@2x.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li class="current"><a href="../../index.html#case-studies" aria-current="page">Case Studies</a></li>
+                        <li><a href="../../index.html#work">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li>
+                        <li><a href="../../ZeeshanQaswar-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                            <li aria-current="page">G.I. Joe multiplayer</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Engineering case study</p>
+                    <h1 class="cs-hero__title">G.I. Joe: Wrath of Cobra — Adapting an Existing Action Game for Multiplayer with Photon Fusion</h1>
+                    <p class="cs-hero__subtitle">A focused multiplayer integration covering authority, tick-based input, networked gameplay and AI, host migration, and continuity when a session fails.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Development Lead</dd></div><div><dt>Duration</dt><dd>~2 months</dd></div><div><dt>Multiplayer team</dt><dd>2 developers</dd></div><div><dt>Technology</dt><dd>Unity + Photon Fusion</dd></div><div><dt>Context</dt><dd>Multiplayer implementation outsourced by Maple Powered Games to my team/company</dd></div></dl>
+
+                    <p class="cs-hero__summary">Led a two-developer multiplayer adaptation of an existing action game using Photon Fusion, covering authority and tick-based input, networked player/AI state, spawning, host migration, and online-to-offline continuity.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>Photon Fusion</li><li>Multiplayer</li><li>Authority</li><li>Host Migration</li></ul>
+                        <ul class="cs-links"><li><a class="ext-link" href="https://store.steampowered.com/app/2516170/GI_Joe_Wrath_of_Cobra/" target="_blank" rel="noopener">Steam page<span class="u-screen-reader-text"> (opens in new tab)</span></a></li><li><a class="ext-link" href="https://www.youtube.com/watch?v=zWeUrH3g4AU" target="_blank" rel="noopener">Trailer<span class="u-screen-reader-text"> (opens in new tab)</span></a></li></ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#context">Context</a></li><li><a href="#responsibility">My responsibility</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#problem-authority">Authority-based networking</a></li><li><a href="#problem-ai">Networked AI &amp; enemies</a></li><li><a href="#problem-offline">Online-to-offline continuity</a></li><li><a href="#problem-migration">Host migration</a></li><li><a href="#highlights">Implementation highlights</a></li><li><a href="#outcome">Outcome</a></li><li><a href="#reflection">Reflection</a></li><li><a href="#evidence">Media &amp; evidence</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="context" aria-labelledby="context-title">
+                                <span class="cs-kicker">Context</span>
+                                <h2 id="context-title">Adding multiplayer to a game that already worked offline</h2>
+                                
+                                <p>The existing game already contained its gameplay systems, but multiplayer had not been implemented when I joined the engagement. The task was therefore not to build a new game around networking; it was to understand an existing action-game codebase and adapt its gameplay systems to a coherent multiplayer model without unnecessarily rewriting the original product.</p>
+                            </section>
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>I led the two-developer multiplayer effort, designed the networking approach, implemented the main Fusion systems, mentored the other developer, and worked directly with Maple Powered Games engineers when existing gameplay behavior needed clarification or coordination.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>What I owned</h3>
+                                <ul><li>Networking approach: authority, input, replicated state</li><li>Main Photon Fusion systems implementation</li><li>Network-aware spawning, host migration, and failure handling</li><li>Adapting existing systems for multiplayer</li><li>Mentoring the second multiplayer developer</li><li>Coordination with the original gameplay engineers</li></ul>
+                            </div>
+                                <div class="cs-ownership__boundary">
+                                    <h3>Pre-existing (not mine)</h3>
+                                    <ul><li>Combat, AI, animations, and gameplay systems were existing game code.</li><li>Fusion’s prediction and tick model is provided by Photon Fusion; my work was applying it to this game.</li></ul>
+                                </div>
+                        </div>
+                    </section>
+                            <section class="cs-section" id="architecture" aria-labelledby="architecture-title">
+                                <span class="cs-kicker">Architecture</span>
+                                <h2 id="architecture-title">Client-host topology with Photon Fusion</h2>
+                                
+                                <p>Client-host topology using Photon Fusion. Players held Input Authority for their player input while the host held State Authority over authoritative networked state and simulation.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual flow: input to replicated state</figcaption>
+                            <ol class="cs-flow cs-flow--vertical">
+                                <li><span class="cs-flow__node">Local input</span></li><li><span class="cs-flow__node">PlayerNetworkInput<small>input packed for the network</small></span></li><li><span class="cs-flow__node">Fusion tick / GetInput<small>tick-based input consumption</small></span></li><li><span class="cs-flow__node cs-flow__node--accent">Host State Authority<small>authoritative simulation</small></span></li><li><span class="cs-flow__node">Gameplay / AI state<small>networked properties</small></span></li><li><span class="cs-flow__node">Replicated proxies / rendering<small>on every client</small></span></li>
+                            </ol>
+                            
+                        </figure>
+                                <h3>Implementation themes</h3>
+                                <ul>
+                                    <li><code>NetworkRunner</code>/session setup with host and client modes</li>
+                                    <li>Input provisioning and tick-based input consumption</li>
+                                    <li>State/input authority checks</li>
+                                    <li><code>NetworkBehaviour</code>, <code>NetworkObject</code>, and networked properties</li>
+                                    <li>Player state replication</li>
+                                    <li>Network-aware spawn/despawn and network object pooling</li>
+                                    <li>Networked AI conversion</li>
+                                    <li>Host migration</li>
+                                    <li>Disconnect/shutdown handling and online-to-offline fallback</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="problem-authority" aria-labelledby="problem-authority-title">
+                                <span class="cs-kicker">Engineering problem 01</span>
+                                <h2 id="problem-authority-title">Adapting existing gameplay to authority-based networking</h2>
+                                
+                                <p>Existing gameplay code assumed local execution. Multiplayer required deciding which actions could remain responsive on the player's machine and which state had to be authoritative on the host.</p>
+                                <p>Player input was captured locally, packed into Fusion network input, and consumed in the network simulation. The host/state-authoritative side controlled important gameplay state such as health and other replicated player values, while players retained responsive input through Fusion's predicted, tick-based model.</p>
+                            </section>
+                            <section class="cs-section" id="problem-ai" aria-labelledby="problem-ai-title">
+                                <span class="cs-kicker">Engineering problem 02</span>
+                                <h2 id="problem-ai-title">Converting AI and enemies without redesigning the game</h2>
+                                
+                                <p>Enemy and boss behavior already existed. The multiplayer layer had to preserve that behavior while preventing every client from independently simulating AI and diverging.</p>
+                                <p>AI simulation was gated so that the authoritative instance drove behavior/state while clients received the synchronized result. Enemy health/state and network-aware spawning/despawning were adapted around this model.</p>
+                                <p>In short: I converted existing enemy and boss gameplay systems for host-authoritative multiplayer simulation. The AI design itself was part of the original game.</p>
+                            </section>
+                            <section class="cs-section" id="problem-offline" aria-labelledby="problem-offline-title">
+                                <span class="cs-kicker">Engineering problem 03</span>
+                                <h2 id="problem-offline-title">Session failure without immediately ending the player's game</h2>
+                                
+                                <p>One of the more distinctive requirements was handling loss of the multiplayer session without forcing the player to abandon the current run.</p>
+                                <p>The multiplayer module contains explicit shutdown/error handling that snapshots local player state, recreates an offline player, restores relevant state, and recreates enemies locally so play can continue outside the network session.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Online-to-offline continuity</figcaption>
+                            <ol class="cs-flow cs-flow--vertical">
+                                <li><span class="cs-flow__node">Session shutdown / error</span></li><li><span class="cs-flow__node">Snapshot local player state</span></li><li><span class="cs-flow__node">Recreate offline player</span></li><li><span class="cs-flow__node">Restore relevant state</span></li><li><span class="cs-flow__node">Recreate enemies locally</span></li><li><span class="cs-flow__node cs-flow__node--accent">Play continues offline</span></li>
+                            </ol>
+                            
+                        </figure>
+                                <p>This required thinking about the boundary between network-owned state and the underlying offline gameplay model rather than treating disconnect as a simple error screen.</p>
+                            </section>
+                            <section class="cs-section" id="problem-migration" aria-labelledby="problem-migration-title">
+                                <span class="cs-kicker">Engineering problem 04</span>
+                                <h2 id="problem-migration-title">Host migration</h2>
+                                
+                                <p>The module implements Fusion host migration rather than relying only on a simple disconnect flow. It restarts the runner using a <code>HostMigrationToken</code>, iterates resume snapshot objects, recreates network objects, copies state, restores scene-object/networked behavior state, rebuilds player mappings, and reassigns input authority where needed.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Host migration sequence</figcaption>
+                            <ol class="cs-flow cs-flow--vertical">
+                                <li><span class="cs-flow__node cs-flow__node--accent">Restart runner<small>with HostMigrationToken</small></span></li><li><span class="cs-flow__node">Iterate resume snapshot objects</span></li><li><span class="cs-flow__node">Recreate network objects &amp; copy state</span></li><li><span class="cs-flow__node">Restore scene-object / networked behavior state</span></li><li><span class="cs-flow__node">Rebuild player mappings</span></li><li><span class="cs-flow__node">Reassign input authority<small>where needed</small></span></li>
+                            </ol>
+                            
+                        </figure>
+                                <p>This is one of the strongest pieces of direct networking evidence in the project because it deals with reconstructing a running session rather than only synchronizing ordinary gameplay.</p>
+                            </section>
+                            <section class="cs-section" id="highlights" aria-labelledby="highlights-title">
+                                <span class="cs-kicker">Implementation</span>
+                                <h2 id="highlights-title">Additional implementation highlights</h2>
+                                
+                                <ul>
+                                    <li>Networked player health/lives/score/combo/stamina and related state</li>
+                                    <li>Projectile/network spawning paths</li>
+                                    <li>Pickups/equipment/interactions adapted to networking</li>
+                                    <li>Selected RPC-driven events/effects</li>
+                                    <li>Custom <code>INetworkObjectPool</code> integration</li>
+                                    <li>Animation/state synchronization work</li>
+                                    <li>Host-side physics/gameplay interactions against AI</li>
+                                </ul>
+                        <div class="pf-callout cs-callout cs-callout--note" role="note">
+                            <p class="pf-callout__label">Scope note: latency</p>
+                            <p>I designed and tested latency-aware multiplayer behavior using Photon Fusion's network simulation model. Prediction and the tick model come from Fusion itself; this project did not involve a custom lag-compensation or prediction/reconciliation system.</p>
+                        </div>
+                        <div class="pf-callout cs-callout cs-callout--note" role="note">
+                            <p class="pf-callout__label">Confidentiality</p>
+                            <p>The source code belongs to the client. This case study describes the approach conceptually and does not reproduce proprietary code.</p>
+                        </div>
+                            </section>
+                            <section class="cs-section" id="outcome" aria-labelledby="outcome-title">
+                                <span class="cs-kicker">Outcome</span>
+                                <h2 id="outcome-title">Outcome</h2>
+                                
+                                <p>Delivered a substantial multiplayer adaptation layer over an existing action game within a focused engagement, while coordinating with the original gameplay engineers and mentoring another developer on the multiplayer team.</p>
+                            </section>
+                            <section class="cs-section" id="reflection" aria-labelledby="reflection-title">
+                                <span class="cs-kicker">Reflection</span>
+                                <h2 id="reflection-title">A different kind of ownership</h2>
+                                
+                                <p>This project represents a different kind of ownership from a greenfield multiplayer game. The challenge was understanding a mature gameplay codebase quickly, identifying where networking boundaries belonged, and integrating Fusion without replacing systems that already worked offline.</p>
+                            </section>
+                            <section class="cs-section" id="evidence" aria-labelledby="evidence-title">
+                                <span class="cs-kicker">Media</span>
+                                <h2 id="evidence-title">Media &amp; external evidence</h2>
+                                
+                        <figure class="cs-figure">
+                            <a class="cs-video" href="https://www.youtube.com/watch?v=zWeUrH3g4AU" target="_blank" rel="noopener"
+                                data-youtube-id="zWeUrH3g4AU" data-title="G.I. Joe: Wrath of Cobra trailer (product media)">
+                                <img src="../../images/folio/Cobra.jpg" srcset="../../images/folio/Cobra.jpg 750w, ../../images/folio/Cobra@2x.jpg 1500w"
+                                    sizes="(max-width: 1000px) 92vw, 780px" width="750" height="563" loading="lazy" alt="">
+                                <span class="cs-video__play">Play video<span class="u-screen-reader-text">: G.I. Joe: Wrath of Cobra trailer (product media)</span></span>
+                            </a>
+                            <figcaption>G.I. Joe: Wrath of Cobra trailer (product media). The YouTube player loads only when you press play.</figcaption>
+                        </figure>
+                                <ul>
+                                    <li><a class="ext-link" href="https://store.steampowered.com/app/2516170/GI_Joe_Wrath_of_Cobra/" target="_blank" rel="noopener">G.I. Joe: Wrath of Cobra on Steam<span class="u-screen-reader-text"> (opens in new tab)</span></a></li>
+                                </ul>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../case-studies/pro-golf-personalisation/"><span>Next case study</span>Pro Golf — progressive personalisation loading</a><a href="../../case-studies/space/"><span>Case study</span>SPACE — research-grade spatial assessment platform</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../ZeeshanQaswar-Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span><a href="mailto:xeeshanqaswar@gmail.com">xeeshanqaswar@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>

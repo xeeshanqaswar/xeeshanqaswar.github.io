@@ -85,10 +85,15 @@
 
         if (!(toggleButton && mainNavWrap)) return;
 
+        const syncExpanded = function() {
+            toggleButton.setAttribute('aria-expanded', siteBody.classList.contains('menu-is-open') ? 'true' : 'false');
+        };
+
         toggleButton.addEventListener('click', function(e) {
             e.preventDefault();
             toggleButton.classList.toggle('is-clicked');
             siteBody.classList.toggle('menu-is-open');
+            syncExpanded();
         });
 
         mainNavWrap.querySelectorAll('.s-header__nav a').forEach(function(link) {
@@ -99,6 +104,7 @@
                 if (window.matchMedia('(max-width: 900px)').matches) {
                     toggleButton.classList.toggle('is-clicked');
                     siteBody.classList.toggle('menu-is-open');
+                    syncExpanded();
                 }
             });
         });
@@ -109,6 +115,7 @@
             if (window.matchMedia('(min-width: 901px)').matches) {
                 if (siteBody.classList.contains('menu-is-open')) siteBody.classList.remove('menu-is-open');
                 if (toggleButton.classList.contains('is-clicked')) toggleButton.classList.remove('is-clicked');
+                syncExpanded();
             }
         });
 
@@ -120,7 +127,7 @@
     const ssScrollSpy = function() {
 
         const sections = document.querySelectorAll('.target-section');
-        if (!sections) return;
+        if (!sections.length) return;
 
         // Add an event listener listening for scroll
         window.addEventListener('scroll', navHighlight);
@@ -136,6 +143,8 @@
                 const sectionHeight = current.offsetHeight;
                 const sectionTop = current.offsetTop - 50;
                 const sectionId = current.getAttribute('id');
+                const navLink = document.querySelector('.s-header__nav a[href="#' + sectionId + '"]');
+                if (!navLink) return;
             
                /* If our current scroll position enters the space where current section 
                 * on screen is, add .current class to parent element(li) of the thecorresponding 
@@ -144,9 +153,9 @@
                 * an selector
                 */
                 if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelector('.s-header__nav a[href*=' + sectionId + ']').parentNode.classList.add('current');
+                    navLink.parentNode.classList.add('current');
                 } else {
-                    document.querySelector('.s-header__nav a[href*=' + sectionId + ']').parentNode.classList.remove('current');
+                    navLink.parentNode.classList.remove('current');
                 }
             });
         }
@@ -157,6 +166,8 @@
    /* glightbox
     * ------------------------------------------------------ */ 
     const ssGLightbox = function() {
+
+        if (typeof GLightbox === 'undefined' || !document.querySelector('.glightbox')) return;
 
         const lightbox = GLightbox({
             selector: '.glightbox',
@@ -177,6 +188,8 @@
    /* swiper
     * ------------------------------------------------------ */ 
     const ssSwiper = function() {
+
+        if (typeof Swiper === 'undefined' || !document.querySelector('.s-testimonials__slider')) return;
 
         const testimonialsSwiper = new Swiper('.s-testimonials__slider', {
 
@@ -296,6 +309,55 @@
     }; // end ssMoveTo
 
 
+   /* case study table of contents: highlight current section
+    * ------------------------------------------------------ */
+    const ssCaseStudyToc = function() {
+
+        const links = document.querySelectorAll('.cs-toc a[href^="#"]');
+        if (!links.length || !('IntersectionObserver' in window)) return;
+
+        const byId = {};
+        links.forEach(function(link) {
+            byId[link.getAttribute('href').slice(1)] = link;
+        });
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                links.forEach(function(link) { link.classList.remove('is-active'); });
+                const active = byId[entry.target.id];
+                if (active) active.classList.add('is-active');
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+
+        Object.keys(byId).forEach(function(id) {
+            const section = document.getElementById(id);
+            if (section) observer.observe(section);
+        });
+
+    }; // end ssCaseStudyToc
+
+
+   /* video facade: load the YouTube player only on request
+    * ------------------------------------------------------ */
+    const ssVideoFacade = function() {
+
+        document.querySelectorAll('.cs-video[data-youtube-id]').forEach(function(facade) {
+            facade.addEventListener('click', function(e) {
+                e.preventDefault();
+                const iframe = document.createElement('iframe');
+                iframe.src = 'https://www.youtube-nocookie.com/embed/' + facade.dataset.youtubeId + '?autoplay=1&rel=0';
+                iframe.title = facade.dataset.title || 'Video';
+                iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+                iframe.allowFullscreen = true;
+                facade.replaceChildren(iframe);
+                facade.removeAttribute('href');
+            });
+        });
+
+    }; // end ssVideoFacade
+
+
    /* Initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -308,6 +370,8 @@
         ssSwiper();
         ssAlertBoxes();
         ssMoveTo();
+        ssCaseStudyToc();
+        ssVideoFacade();
 
     })();
 

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Duel X — Solo PUN2 Multiplayer Game for WebGL | Zeeshan Qaswar</title>
+    <meta name="description" content="Project notes on solo-developing a 2–4 player WebGL math strategy game with Unity and Photon PUN2, including matchmaking, turn synchronization, AI, PlayFab, and Firebase.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/work/duel-x/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="Duel X — Solo PUN2 Multiplayer Game for WebGL">
+    <meta property="og:description" content="Project notes on solo-developing a 2–4 player WebGL math strategy game with Unity and Photon PUN2, including matchmaking, turn synchronization, AI, PlayFab, and Firebase.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/work/duel-x/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/folio/DuelX@2x.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="Duel X — Solo PUN2 Multiplayer Game for WebGL">
+    <meta name="twitter:description" content="Project notes on solo-developing a 2–4 player WebGL math strategy game with Unity and Photon PUN2, including matchmaking, turn synchronization, AI, PlayFab, and Firebase.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/folio/DuelX@2x.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                        <li class="current"><a href="../../index.html#work" aria-current="page">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li>
+                        <li><a href="../../ZeeshanQaswar-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#work">Work</a></li>
+                            <li aria-current="page">Duel X</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Production work</p>
+                    <h1 class="cs-hero__title">Duel X — Solo PUN2 Multiplayer Game for WebGL</h1>
+                    <p class="cs-hero__subtitle">A small 2–4 player turn-based math/board game, developed solo: gameplay, UI, AI, multiplayer, player accounts, and analytics.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Solo developer</dd></div><div><dt>Players</dt><dd>2–4, turn-based</dd></div><div><dt>Platform</dt><dd>WebGL (cross-client tested with Android)</dd></div><div><dt>Technology</dt><dd>Unity, Photon PUN2, PlayFab, Firebase</dd></div></dl>
+
+                    <p class="cs-hero__summary">Solo-developed a 2–4 player WebGL math strategy game using Unity and Photon PUN2, implementing gameplay, AI, random matchmaking, turn synchronization, shared board state, PlayFab progression, and Firebase analytics/crash reporting.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>PUN2</li><li>Solo Development</li><li>WebGL</li><li>PlayFab</li></ul>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#summary">Summary</a></li><li><a href="#responsibility">My responsibility</a></li><li><a href="#multiplayer">Multiplayer model</a></li><li><a href="#testing">Testing</a></li><li><a href="#limitations">Honest limitations</a></li><li><a href="#media">Media</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="summary" aria-labelledby="summary-title">
+                                <span class="cs-kicker">Summary</span>
+                                <h2 id="summary-title">A small multiplayer game, built end to end</h2>
+                                
+                                <p>Solo-developed a small 2–4 player turn-based math/board game, covering gameplay, UI, AI, multiplayer, player accounts, and analytics.</p>
+                            </section>
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>I was the sole developer, so the gameplay, UI, AI, multiplayer, accounts, and analytics integration were all mine.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>Everything (solo)</h3>
+                                <ul><li>Gameplay and UI</li><li>AI opponent/fill behavior</li><li>Photon PUN2 multiplayer</li><li>PlayFab accounts/progression</li><li>Firebase Analytics / Crashlytics integration</li></ul>
+                            </div>
+                        </div>
+                    </section>
+                            <section class="cs-section" id="multiplayer" aria-labelledby="multiplayer-title">
+                                <span class="cs-kicker">Multiplayer</span>
+                                <h2 id="multiplayer-title">Multiplayer model</h2>
+                                
+                                <p>Duel X uses Photon PUN2 with random matchmaking and Master Client coordination. Turns, timers, and game state are synchronized through RPCs and PhotonViews, and the shared board data is reconstructed locally on each client.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual multiplayer flow</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node">Random matchmaking</span></li><li><span class="cs-flow__node cs-flow__node--accent">Master Client coordination</span></li><li><span class="cs-flow__node">RPC / PhotonView sync<small>turns, timers, lives, score</small></span></li><li><span class="cs-flow__node">Shared board reconstructed locally</span></li>
+                            </ol>
+                            
+                        </figure>
+                                <h3>Evidence-backed work</h3>
+                                <ul>
+                                    <li>Photon PUN2</li>
+                                    <li>Random matchmaking</li>
+                                    <li>Master Client coordination</li>
+                                    <li>RPC / PhotonView synchronization</li>
+                                    <li>Turn state and timers</li>
+                                    <li>Shared board data reconstructed locally</li>
+                                    <li>Player lives/score/game state</li>
+                                    <li>AI opponent/fill behavior</li>
+                                    <li>PlayFab accounts/progression</li>
+                                    <li>Firebase Analytics / Crashlytics</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="testing" aria-labelledby="testing-title">
+                                <span class="cs-kicker">Testing</span>
+                                <h2 id="testing-title">Cross-client testing</h2>
+                                
+                                <ul>
+                                    <li>WebGL and Android cross-client testing</li>
+                                    <li>Latency testing up to approximately 200 ms</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="limitations" aria-labelledby="limitations-title">
+                                <span class="cs-kicker">Honest limitations</span>
+                                <h2 id="limitations-title">What this project does not demonstrate</h2>
+                                
+                                <ul>
+                                    <li>No robust reconnect/rejoin/state restoration</li>
+                                    <li>Client-host/shared PUN2 architecture rather than dedicated authoritative server architecture</li>
+                                    <li>No demonstrated prediction/reconciliation/lag compensation</li>
+                                    <li>No anti-cheat/security architecture</li>
+                                </ul>
+                            </section>
+                            <section class="cs-section" id="media" aria-labelledby="media-title">
+                                <span class="cs-kicker">Media</span>
+                                <h2 id="media-title">Media</h2>
+                                
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/DuelX.jpg" srcset="../../images/folio/DuelX.jpg 750w, ../../images/folio/DuelX@2x.jpg 1500w"
+                                        sizes="(max-width: 1000px) 92vw, 780px" width="750" height="563" loading="lazy"
+                                        alt="Duel X game artwork">
+                                    <figcaption>Duel X.</figcaption>
+                                </figure>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../work/jackaroo-masters/"><span>Production work</span>Jackaroo Masters — PlayFab social systems</a><a href="../../case-studies/gi-joe-multiplayer/"><span>Case study</span>G.I. Joe: Wrath of Cobra — Photon Fusion multiplayer</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../ZeeshanQaswar-Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span><a href="mailto:xeeshanqaswar@gmail.com">xeeshanqaswar@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>

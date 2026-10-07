@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jackaroo Masters — PlayFab Social Systems &amp; Unity/Cocos Integration | Zeeshan Qaswar</title>
+    <meta name="description" content="Project notes on owning the Unity-side PlayFab and social systems integration for a live multiplayer board/card product, including a Unity↔Cocos WebView bridge.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/work/jackaroo-masters/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="Jackaroo Masters — PlayFab Social Systems and Unity/Cocos Integration">
+    <meta property="og:description" content="Project notes on owning the Unity-side PlayFab and social systems integration for a live multiplayer board/card product, including a Unity↔Cocos WebView bridge.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/work/jackaroo-masters/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/intro-bg.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="Jackaroo Masters — PlayFab Social Systems and Unity/Cocos Integration">
+    <meta name="twitter:description" content="Project notes on owning the Unity-side PlayFab and social systems integration for a live multiplayer board/card product, including a Unity↔Cocos WebView bridge.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/intro-bg.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                        <li class="current"><a href="../../index.html#work" aria-current="page">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li>
+                        <li><a href="../../ZeeshanQaswar-Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#work">Work</a></li>
+                            <li aria-current="page">Jackaroo Masters</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Production work</p>
+                    <h1 class="cs-hero__title">Jackaroo Masters — PlayFab Social Systems and Unity/Cocos Integration</h1>
+                    <p class="cs-hero__subtitle">Owned the Unity-side service and social integration for a multiplayer board/card product whose core game ran in Cocos Creator.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Unity-side services &amp; social integration</dd></div><div><dt>Technology</dt><dd>Unity, PlayFab, Firebase, gree/unity-webview</dd></div><div><dt>Product</dt><dd>Live multiplayer board/card product</dd></div></dl>
+
+                    <p class="cs-hero__summary">Owned the Unity-side PlayFab and social systems integration for a live multiplayer board/card product, including authentication/account linking, player data, economy/inventory, leaderboards, friend workflows, matchmaking/invites, and a Unity↔Cocos WebView bridge.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>PlayFab</li><li>Social Systems</li><li>Unity/Cocos Integration</li></ul>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#summary">Summary</a></li><li><a href="#responsibility">Responsibility boundary</a></li><li><a href="#work">Evidence-backed work</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="summary" aria-labelledby="summary-title">
+                                <span class="cs-kicker">Summary</span>
+                                <h2 id="summary-title">Unity-side services around a Cocos game</h2>
+                                
+                                <p>Owned the Unity-side service and social integration for a multiplayer board/card product whose core game ran in Cocos Creator.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Conceptual integration boundary</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node cs-flow__node--accent">Unity shell<small>PlayFab &amp; social layer</small></span></li><li><span class="cs-flow__node">WebView bridge<small>gree/unity-webview + JavaScript bridge</small></span></li><li><span class="cs-flow__node">Cocos Creator game<small>core game &amp; multiplayer gameplay</small></span></li>
+                            </ol>
+                            <p class="cs-diagram__note">Only the Unity shell and the bridge were my responsibility.</p>
+                        </figure>
+                            </section>
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>Core game logic and core multiplayer gameplay were implemented by another developer in Cocos Creator. My responsibility was the Unity-side PlayFab/social layer and the integration between the Unity shell and the Cocos game.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>What I owned</h3>
+                                <ul><li>Unity-side PlayFab/social layer</li><li>Unity ↔ Cocos integration</li></ul>
+                            </div>
+                                <div class="cs-ownership__boundary">
+                                    <h3>Not mine</h3>
+                                    <ul><li>Core game logic (Cocos Creator, another developer)</li><li>Core multiplayer gameplay (Cocos Creator, another developer)</li></ul>
+                                </div>
+                        </div>
+                    </section>
+                            <section class="cs-section" id="work" aria-labelledby="work-title">
+                                <span class="cs-kicker">Implementation</span>
+                                <h2 id="work-title">Evidence-backed work</h2>
+                                
+                                <h3>Accounts &amp; player data</h3>
+                                <ul>
+                                    <li>Guest PlayFab account creation</li>
+                                    <li>Google/Facebook account linking and progress continuity</li>
+                                    <li>Player profile/data</li>
+                                </ul>
+                                <h3>Economy &amp; competition</h3>
+                                <ul>
+                                    <li>Coins/gems and cosmetic inventory flows</li>
+                                    <li>Global/weekly leaderboards</li>
+                                </ul>
+                                <h3>Social</h3>
+                                <ul>
+                                    <li>Friend request / accept / reject workflow built around available PlayFab primitives</li>
+                                    <li>Text/voice service integration</li>
+                                    <li>PlayFab-side matchmaking/invite flows</li>
+                                    <li>Firebase notification integration for invites</li>
+                                </ul>
+                                <h3>Cross-runtime integration</h3>
+                                <ul>
+                                    <li><code>gree/unity-webview</code></li>
+                                    <li>Unity ↔ Cocos JavaScript bridge</li>
+                                </ul>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../work/duel-x/"><span>Production work</span>Duel X — solo PUN2 multiplayer game</a><a href="../../case-studies/gi-joe-multiplayer/"><span>Case study</span>G.I. Joe: Wrath of Cobra — Photon Fusion multiplayer</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../ZeeshanQaswar-Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span><a href="mailto:xeeshanqaswar@gmail.com">xeeshanqaswar@gmail.com</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>
