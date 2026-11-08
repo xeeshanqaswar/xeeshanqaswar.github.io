@@ -1384,3 +1384,13 @@ summary:focus-visible {
 .cs-figure--narrow {
     max-width: 320px;
 }
+
+.cs-table-wrap {
+    overflow-x: auto;
+    margin-bottom: var(--vspace-1);
+}
+
+.cs-table-wrap table {
+    margin-bottom: 0;
+    white-space: nowrap;
+}

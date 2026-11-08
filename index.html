@@ -277,6 +277,7 @@
                                     <li class="pf-chips__label" aria-hidden="true">Evidence</li>
                                     <li><a class="pf-chip" href="case-studies/space/">SPACE</a></li>
                                     <li><a class="pf-chip" href="case-studies/pro-golf-personalisation/">Pro Golf</a></li>
+                                    <li><a class="pf-chip" href="case-studies/poi-system/">POI System</a></li>
                                 </ul>
                             </div>
                         </article>
@@ -337,8 +338,7 @@
                         <h2 class="pf-head__title" id="case-studies-title">Difficult problems, ownership, and the decisions behind the implementation.</h2>
                         <p class="pf-head__intro">
                             These are not product galleries. Each case study focuses on what I personally owned, the
-                            constraints I was working under, and the engineering decisions used to move the system into
-                            production.
+                            constraints I was working under, and the engineering decisions behind the system.
                         </p>
                     </div>
 
@@ -421,6 +421,34 @@
                                         <li>Progressive Loading</li>
                                     </ul>
                                     <a class="pf-cta-link" href="case-studies/pro-golf-personalisation/">Read engineering case study<span class="u-screen-reader-text">: Pro Golf</span></a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="pf-case">
+                            <a class="pf-case__media" href="case-studies/poi-system/" tabindex="-1" aria-hidden="true">
+                                <img src="images/folio/poi/poi-high-density-simulation.jpg"
+                                    srcset="images/folio/poi/poi-high-density-simulation.jpg 960w, images/folio/poi/poi-high-density-simulation@2x.jpg 1920w"
+                                    sizes="(max-width: 900px) 92vw, 540px" width="960" height="540"
+                                    loading="lazy" alt="">
+                            </a>
+                            <div class="pf-case__body">
+                                <p class="pf-card__kicker">Solo engineer · Open-source prototype · ~25–30 hours</p>
+                                <h3 class="pf-case__title"><a href="case-studies/poi-system/">Live POI System</a></h3>
+                                <p class="pf-case__copy">
+                                    Built a point-of-interest system whose per-frame cost follows what the camera sees,
+                                    not the size of a churning 250,000-record world: spatial hashing with O(1) updates,
+                                    bounded priority selection under a 250-marker budget, pooled Addressables markers,
+                                    edit-mode tests, and profiler measurements.
+                                </p>
+                                <div class="pf-case__footer">
+                                    <ul class="pf-tags">
+                                        <li>Performance</li>
+                                        <li>Data Structures</li>
+                                        <li>Architecture</li>
+                                        <li>Testing</li>
+                                    </ul>
+                                    <a class="pf-cta-link" href="case-studies/poi-system/">Read engineering case study<span class="u-screen-reader-text">: Live POI System</span></a>
                                 </div>
                             </div>
                         </article>

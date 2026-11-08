@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js cs-doc">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live POI System Case Study — Spatial Indexing, Marker Budgets &amp; Churn in Unity | Zeeshan Qaswar</title>
+    <meta name="description" content="Engineering case study on a Unity point-of-interest system that keeps per-frame cost tied to what the camera sees, not to the size of a churning 250,000-record dataset. Spatial hashing, bounded priority selection, pooled Addressables markers, edit-mode tests and profiler measurements.">
+    <link rel="canonical" href="https://zeeshanqaswar.com/case-studies/poi-system/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Zeeshan Qaswar">
+    <meta property="og:title" content="Live POI System — Scaling World-Space Markers to a 250,000-Record Churning Dataset">
+    <meta property="og:description" content="Spatial hashing, bounded priority selection, pooled Addressables markers, edit-mode tests and profiler measurements in a Unity prototype.">
+    <meta property="og:url" content="https://zeeshanqaswar.com/case-studies/poi-system/">
+    <meta property="og:image" content="https://zeeshanqaswar.com/images/folio/poi/poi-high-density-simulation@2x.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Zeo_Lion">
+    <meta name="twitter:title" content="Live POI System — Scaling World-Space Markers to a 250,000-Record Churning Dataset">
+    <meta name="twitter:description" content="Spatial hashing, bounded priority selection, pooled Addressables markers, edit-mode tests and profiler measurements in a Unity prototype.">
+    <meta name="twitter:image" content="https://zeeshanqaswar.com/images/folio/poi/poi-high-density-simulation@2x.jpg">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="stylesheet" href="../../css/vendor.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/portfolio.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+    <link rel="manifest" href="../../site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700&amp;display=swap" rel="stylesheet">
+
+</head>
+
+
+<body id="top" class="ss-show">
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div id="page" class="s-pagewrap">
+
+        <header class="s-header">
+            <div class="row s-header__inner">
+
+                <div class="s-header__block">
+                    <div class="s-header__logo">
+                        <a class="logo" href="../../index.html">
+                            <img src="../../images/logo.png" alt="Zeeshan Qaswar — home">
+                        </a>
+                    </div>
+
+                    <a class="s-header__menu-toggle" href="#0" role="button" aria-controls="site-nav" aria-expanded="false"><span>Menu</span></a>
+                </div>
+
+                <nav class="s-header__nav" id="site-nav" aria-label="Main">
+                    <ul class="s-header__menu-links">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li class="current"><a href="../../index.html#case-studies" aria-current="page">Case Studies</a></li>
+                        <li><a href="../../index.html#work">Work</a></li>
+                        <li><a href="../../index.html#about">About</a></li><li><a href="../../Zeeshan_Qaswar_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+
+
+        <main id="main">
+
+        <!-- # case study header
+        ================================================== -->
+        <header id="intro" class="cs-hero">
+            <div class="row">
+                <div class="column">
+
+                    <nav aria-label="Breadcrumb">
+                        <ol class="cs-breadcrumb">
+                            <li><a href="../../index.html">Home</a></li>
+                            <li><a href="../../index.html#case-studies">Case Studies</a></li>
+                            <li aria-current="page">Live POI system</li>
+                        </ol>
+                    </nav>
+
+                    <p class="text-pretitle">Engineering case study · Open-source prototype</p>
+                    <h1 class="cs-hero__title">Live POI System — Scaling World-Space Markers to a 250,000-Record Churning Dataset</h1>
+                    <p class="cs-hero__subtitle">A Unity prototype in which per-frame cost follows what the camera can see, not how many points of interest exist in the world, while the dataset keeps changing underneath it.</p>
+
+                    <dl class="cs-meta"><div><dt>Role</dt><dd>Solo engineer</dd></div><div><dt>Effort</dt><dd>~25–30 hours: research, implementation, testing</dd></div><div><dt>Context</dt><dd>Built to an external technical brief</dd></div><div><dt>Engine</dt><dd>Unity 2022.3 LTS</dd></div><div><dt>Source</dt><dd>Public on GitHub</dd></div></dl>
+
+                    <p class="cs-hero__summary">Designed and built a point-of-interest system for a 16 km × 16 km world: a pure C# spatial store with incremental updates, a bounded priority selector that enforces a 250-marker budget, pooled Addressables markers, VContainer composition, edit-mode tests, and profiler measurements from 1,000 to 250,000 live records.</p>
+
+                    <div class="cs-hero__row">
+                        <ul class="pf-tags pf-tags--dark"><li>Performance</li><li>Data Structures</li><li>Architecture</li><li>Testing</li></ul>
+                        <ul class="cs-links"><li><a class="ext-link" href="https://github.com/xeeshanqaswar/Point-of-Interest-System" target="_blank" rel="noopener">Source on GitHub<span class="u-screen-reader-text"> (opens in new tab)</span></a></li></ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+
+        <!-- # case study body
+        ================================================== -->
+        <div class="cs-body">
+            <div class="row">
+                <div class="column">
+                    <div class="cs-layout">
+
+                        <nav class="cs-toc" aria-label="On this page">
+                            <p class="cs-toc__title">On this page</p>
+                            <ol><li><a href="#context">Context</a></li><li><a href="#responsibility">My responsibility</a></li><li><a href="#architecture">Architecture</a></li><li><a href="#problem-scaling">Cost tied to the view</a></li><li><a href="#problem-churn">Absorbing churn</a></li><li><a href="#problem-budget">Enforcing the budget</a></li><li><a href="#problem-reuse">No stale markers</a></li><li><a href="#measurements">Measurements</a></li><li><a href="#limits">Known limits</a></li><li><a href="#reflection">Reflection</a></li><li><a href="#evidence">Media &amp; evidence</a></li></ol>
+                        </nav>
+
+                        <article class="cs-article">
+
+                            <section class="cs-section" id="context" aria-labelledby="context-title">
+                                <span class="cs-kicker">Context</span>
+                                <h2 id="context-title">A live dataset with no known upper bound</h2>
+
+                                <p>The brief described a 16 km × 16 km open world viewed by a top-down camera that can rise from 50 m to 400 m. Points of interest arrive from a live feed: some exist at session start, others appear, move, change or disappear at any moment. The total count is unknown when the scene loads and must be able to go from 1,000 to 250,000 and back without reloading.</p>
+                                <p>The engineering constraints were the interesting part:</p>
+                                <ul>
+                                    <li>Deciding which POIs deserve a marker must not touch every POI in the world each frame.</li>
+                                    <li>Insertions, moves and removals must be absorbed incrementally, with 5% of a 250,000-record dataset moving continuously.</li>
+                                    <li>At most N markers may be active, keeping the best by priority and then by ground distance from the player, while the player moves and the data churns.</li>
+                                    <li>No GameObject per POI, and no Unity physics queries for selection.</li>
+                                    <li>A pooled marker must never show stale data, even if an asynchronous icon load finishes after the marker was recycled.</li>
+                                    <li>The selection layer must be testable in edit mode with no scene, camera or GameObjects.</li>
+                                </ul>
+                                <p>Because the camera looks straight down, every visible POI is roughly the same distance from the camera. Level of detail is therefore driven by ground distance from the player, not camera distance.</p>
+                            </section>
+
+                    <section class="cs-section cs-ownership" id="responsibility" aria-labelledby="responsibility-title">
+                        <span class="cs-kicker">Ownership</span>
+                        <h2 id="responsibility-title">My responsibility</h2>
+                        <p>This was a solo project. I researched the approach, designed the architecture, implemented and tested it, captured the profiler data and wrote the documentation. The requirements came from an external technical brief; the design decisions and measurements are mine.</p>
+                        <div class="cs-ownership__cols">
+                            <div>
+                                <h3>What I owned</h3>
+                                <ul><li>Spatial store and incremental update strategy</li><li>Bounded priority selection and filtering</li><li>Application service and feed abstraction</li><li>Feed simulator and seed-data loading</li><li>Marker pooling, Addressables loading and LOD presentation</li><li>VContainer composition and assembly boundaries</li><li>Edit-mode test suite</li><li>Profiling, measurement and written limitations</li></ul>
+                            </div>
+                                <div class="cs-ownership__boundary">
+                                    <h3>Not mine</h3>
+                                    <ul><li>The generic priority queue is adapted from Amy Elliott’s implementation; local changes are documented in the repository.</li><li>UniTask and VContainer are third-party libraries.</li><li>AI coding assistants were used within documented architecture guardrails, which the brief permitted.</li></ul>
+                                </div>
+                        </div>
+                    </section>
+
+                            <section class="cs-section" id="architecture" aria-labelledby="architecture-title">
+                                <span class="cs-kicker">Architecture</span>
+                                <h2 id="architecture-title">Keep the question “which POIs matter now?” out of Unity</h2>
+
+                                <p>The system is split into four assemblies with one dependency direction. The domain layer answers the spatial and priority questions in pure C#, so it can be tested without a scene, and it never knows that markers, cameras or Addressables exist.</p>
+                        <figure class="cs-diagram">
+                            <figcaption>Layer dependencies</figcaption>
+                            <ol class="cs-flow">
+                                <li><span class="cs-flow__node">Presentation<small>views, presenters, camera, marker pool</small></span></li><li><span class="cs-flow__node">Application<small>PoiApplicationService, IPoiFeed</small></span></li><li><span class="cs-flow__node cs-flow__node--accent">Domain<small>PoiStore, PoiSelector</small></span></li>
+                            </ol>
+                            <p class="cs-diagram__note">Infrastructure (feed simulator, JSON seed loader) implements the application ports. VContainer wires everything at the composition root.</p>
+                        </figure>
+                        <figure class="cs-diagram">
+                            <figcaption>Per-frame path</figcaption>
+                            <ol class="cs-flow cs-flow--vertical">
+                                <li><span class="cs-flow__node">Camera ground rectangle<small>derived from height and field of view</small></span></li><li><span class="cs-flow__node cs-flow__node--accent">Spatial query<small>only the 200 m cells the rectangle touches</small></span></li><li><span class="cs-flow__node">Filter<small>type, minimum priority, display range</small></span></li><li><span class="cs-flow__node">Bounded selection<small>best N by priority, distance, ID</small></span></li><li><span class="cs-flow__node">Pooled markers<small>icon, or icon + label when close</small></span></li>
+                            </ol>
+                        </figure>
+                                <h3>Architecture themes</h3>
+                                <ul>
+                                    <li>Pure C# domain with no MonoBehaviour, GameObject or UI references</li>
+                                    <li>Passive MonoBehaviour views and plain C# presenters (MVP)</li>
+                                    <li>Feed abstraction raising Added / Moved / Changed / Removed events</li>
+                                    <li>Constructor injection through VContainer, with no singletons or service locator</li>
+                                    <li>Explicit event unsubscription and Addressables release on disposal</li>
+                                </ul>
+                            </section>
+
+                            <section class="cs-section" id="problem-scaling" aria-labelledby="problem-scaling-title">
+                                <span class="cs-kicker">Engineering problem 01</span>
+                                <h2 id="problem-scaling-title">Make per-frame cost follow the view, not the world</h2>
+
+                                <p>A linear scan over every POI is simple and correct, but its cost grows with the whole world. At 250,000 records that is wasted work for a camera that sees a small rectangle of the map.</p>
+                                <p><code>PoiStore</code> divides the ground plane into uniform 200 m cells. Each cell holds a list of POI IDs. A query converts the camera’s ground rectangle into a cell range, visits only those cells and keeps the records that fall inside the rectangle.</p>
+                        <div class="pf-callout cs-callout" role="note">
+                            <p class="pf-callout__label">Stated cost</p>
+                            <p>Spatial query: O(B + C), where B is the number of cells the view touches and C is the number of records in those cells. Neither term depends on the total world population N, only on what lies under the camera.</p>
+                        </div>
+                                <p>Density still matters. If more records crowd into the same visible area, C grows. The design accepts that honestly: cost follows <em>relevant</em> records, which is what the brief asked for.</p>
+                            </section>
+
+                            <section class="cs-section" id="problem-churn" aria-labelledby="problem-churn-title">
+                                <span class="cs-kicker">Engineering problem 02</span>
+                                <h2 id="problem-churn-title">Absorb insertions, moves and removals without rebuilding</h2>
+
+                                <p>With 5% of 250,000 records moving, the index absorbs 12,500 position updates every frame. Rebuilding it was never an option, and naïve list removal (searching a bucket, then shifting elements) would make every move cost more as cells fill up.</p>
+                                <p>Each record caches its current cell and its index inside that cell’s bucket. That makes every mutation a constant-time operation:</p>
+                                <ul>
+                                    <li><strong>Move within a cell:</strong> update the position only.</li>
+                                    <li><strong>Move across cells or remove:</strong> swap the last ID in the bucket into the vacated slot, fix that record’s cached index, then remove from the end of the list.</li>
+                                    <li><strong>Empty cells</strong> are dropped from the dictionary so removed areas do not stay resident.</li>
+                                </ul>
+                                <p>Lookup, add, move and remove are O(1) amortized. A later change stored records as value types inside the dictionary entry, which removed a per-record allocation from the churn path.</p>
+                            </section>
+
+                            <section class="cs-section" id="problem-budget" aria-labelledby="problem-budget-title">
+                                <span class="cs-kicker">Engineering problem 03</span>
+                                <h2 id="problem-budget-title">Keep the best 250 without sorting everything</h2>
+
+                                <p>At maximum height, the camera rectangle can contain far more candidates than the 250-marker budget. Sorting all of them every frame would cost O(Q log Q) for Q visible candidates.</p>
+                                <p><code>PoiSelector</code> instead keeps a bounded heap ordered worst-first. Each candidate is compared against the current worst; it only enters the heap if it beats that worst entry. Ranking is higher priority first, then shorter ground distance from the player, then lower ID, so ties are deterministic and markers do not flicker between equal candidates.</p>
+                        <div class="pf-callout cs-callout" role="note">
+                            <p class="pf-callout__label">Stated cost</p>
+                            <p>Selection: O(Q log M), where M is the marker budget. Space is O(M). The budget holds every frame, including while the player moves and the feed churns.</p>
+                        </div>
+                                <p>Type, minimum-priority and display-range filters are applied inside the same pass, so filter changes take effect on the next frame without any rebuild.</p>
+                            </section>
+
+                            <section class="cs-section" id="problem-reuse" aria-labelledby="problem-reuse-title">
+                                <span class="cs-kicker">Engineering problem 04</span>
+                                <h2 id="problem-reuse-title">Make stale marker data impossible, not just unlikely</h2>
+
+                                <p>The classic pooled-UI bug is an asynchronous icon load finishing after its marker has been recycled for a different POI. Guarding every callback with version tokens works, but it adds a race to reason about on every reuse.</p>
+                                <p>I removed the race instead. The marker prefab and the whole icon catalog load through Addressables once, during initialization. No marker exists until that load completes. After that, binding a pooled marker to a POI is entirely synchronous, so there is no callback that can arrive late.</p>
+                                <p>The failure paths are handled too. If loading fails, or completes after the presenter has been disposed, the handles it acquired are still released.</p>
+                        <div class="pf-callout cs-callout" role="note">
+                            <p class="pf-callout__label">Key tradeoff</p>
+                            <p>A small, fixed icon catalog held in memory, in exchange for marker reuse with no asynchronous state. This fits a bounded set of POI types; a catalog of thousands of unique icons would need a different strategy.</p>
+                        </div>
+                            </section>
+
+                            <section class="cs-section" id="measurements" aria-labelledby="measurements-title">
+                                <span class="cs-kicker">Evidence</span>
+                                <h2 id="measurements-title">Measurements</h2>
+
+                                <p>Measured under the brief’s worst-case workload: player moving, camera at 400 m, 5% of records moving, 100 additions and 100 removals per second, budget of 250. Unity Profiler captures in Editor Play mode at 1920 × 1080, 300 frames each, with no samples discarded. Hardware: Ryzen 5 5600X, RTX 3080, 24 GB RAM.</p>
+                                <div class="cs-table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr><th>POIs in world</th><th>Avg frame</th><th>p95 frame</th><th>Spatial query / frame</th><th>Active markers</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>1,000</td><td>2.53 ms</td><td>3.14 ms</td><td>0.008 ms</td><td>3–4</td></tr>
+                                        <tr><td>25,000</td><td>3.23 ms</td><td>4.40 ms</td><td>0.031 ms</td><td>~30</td></tr>
+                                        <tr><td>250,000</td><td>7.78 ms</td><td>10.75 ms</td><td>0.221 ms</td><td>250 (budget)</td></tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                <p>A 250× larger world raised average frame time by about 3×. Most of that increase comes from the workload itself: moving 5% of the world means 50 updates per frame at 1,000 POIs and 12,500 at 250,000. Even at 250,000 records, the spatial query stays around a fifth of a millisecond.</p>
+                                <p>Raw profiler captures, frame-time CSVs and the calculation method are in the repository.</p>
+                            </section>
+
+                            <section class="cs-section" id="limits" aria-labelledby="limits-title">
+                                <span class="cs-kicker">Limitations</span>
+                                <h2 id="limits-title">What the measurements do not show</h2>
+
+                                <p>I documented these in the repository rather than leaving them for a reviewer to find:</p>
+                                <ul>
+                                    <li><strong>Not allocation-free under churn.</strong> Roughly 100 bytes of GC were observed in sampled frames. Recreating empty cell lists is one known source; it has not been confirmed as the only one.</li>
+                                    <li><strong>Editor numbers only.</strong> Standalone-player performance has not been measured.</li>
+                                    <li><strong>Short captures.</strong> Long-session stability and memory after shrinking from 250,000 back to 1,000 were checked manually, not with a memory capture.</li>
+                                </ul>
+                                <p>The obvious next steps are pooling the cell lists, measuring a standalone build, and a long-session memory capture.</p>
+                            </section>
+
+                            <section class="cs-section" id="reflection" aria-labelledby="reflection-title">
+                                <span class="cs-kicker">Reflection</span>
+                                <h2 id="reflection-title">Choose the data structure, then measure the claim</h2>
+
+                                <p>Most of the performance came from choosing what <em>not</em> to do each frame: not scanning the world, not rebuilding the index, not sorting every candidate, and not giving pooled markers any asynchronous state. The architecture then made those decisions testable: the spatial store and selector are verified in edit mode against independent ground-truth sorting, with no scene involved.</p>
+                                <p>Stating the expected cost first and then measuring it also changed the documentation. Writing down where the numbers stop being evidence is as useful to a reviewer as the numbers themselves.</p>
+                            </section>
+
+                            <section class="cs-section" id="evidence" aria-labelledby="evidence-title">
+                                <span class="cs-kicker">Media</span>
+                                <h2 id="evidence-title">Media &amp; external evidence</h2>
+
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/poi/poi-high-density-simulation.jpg" srcset="../../images/folio/poi/poi-high-density-simulation.jpg 960w, ../../images/folio/poi/poi-high-density-simulation@2x.jpg 1920w"
+                                        sizes="(max-width: 1000px) 92vw, 780px" width="960" height="540" loading="lazy"
+                                        alt="Top-down view of the POI prototype with 250,000 live records, the runtime metrics panel, and the marker budget filled">
+                                    <figcaption>250,000 live POIs with the 250-marker budget enforced.</figcaption>
+                                </figure>
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/poi/poi-player-navigation.gif" width="960" height="540" loading="lazy"
+                                        alt="Animated capture of the player moving across the map while markers stream in and out">
+                                    <figcaption>Markers stream in and out as the player crosses spatial cells.</figcaption>
+                                </figure>
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/poi/poi-camera-zoom.gif" width="960" height="540" loading="lazy"
+                                        alt="Animated capture of the camera rising from 50 metres to 400 metres while labels and markers change">
+                                    <figcaption>Camera height from 50 m to 400 m: labels appear only in the close range, icons in the mid range.</figcaption>
+                                </figure>
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/poi/poi-filtering-and-priorities.jpg" srcset="../../images/folio/poi/poi-filtering-and-priorities.jpg 960w, ../../images/folio/poi/poi-filtering-and-priorities@2x.jpg 1920w"
+                                        sizes="(max-width: 1000px) 92vw, 780px" width="960" height="540" loading="lazy"
+                                        alt="Runtime controls filtering POIs by type and minimum priority">
+                                    <figcaption>Type and priority filters applied live.</figcaption>
+                                </figure>
+                                <figure class="cs-figure">
+                                    <img src="../../images/folio/poi/poi-closeup-labels.jpg" srcset="../../images/folio/poi/poi-closeup-labels.jpg 960w, ../../images/folio/poi/poi-closeup-labels@2x.jpg 1920w"
+                                        sizes="(max-width: 1000px) 92vw, 780px" width="960" height="540" loading="lazy"
+                                        alt="Close-up of markers showing icons, names and ground distance">
+                                    <figcaption>Close range: icon, name and ground distance.</figcaption>
+                                </figure>
+                                <ul>
+                                    <li><a class="ext-link" href="https://github.com/xeeshanqaswar/Point-of-Interest-System" target="_blank" rel="noopener">Source code and README on GitHub<span class="u-screen-reader-text"> (opens in new tab)</span></a></li>
+                                    <li><a class="ext-link" href="https://github.com/xeeshanqaswar/Point-of-Interest-System/blob/main/Documentation/PERFORMANCE.md" target="_blank" rel="noopener">Performance methodology and raw data<span class="u-screen-reader-text"> (opens in new tab)</span></a></li>
+                                </ul>
+                            </section>
+
+                            <nav class="cs-next" aria-label="More engineering work"><a href="../../case-studies/space/"><span>Case study</span>SPACE — research-grade spatial assessment platform</a><a href="../../case-studies/pro-golf-personalisation/"><span>Case study</span>Pro Golf — progressive personalisation loading</a></nav>
+                        </article>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </main>
+
+
+        <!-- # contact / footer
+        ================================================== -->
+        <footer id="contact" class="s-footer">
+
+            <div class="row">
+                <div class="column lg-12">
+                    <div class="pf-head pf-head--light">
+                        <p class="text-pretitle">Contact</p>
+                        <h2 class="pf-head__title">Need help with a difficult Unity system?</h2>
+                        <p class="pf-head__intro">
+                            I’m open to Senior / Lead engineering opportunities and selected consulting work involving
+                            Unity architecture, multiplayer, performance and memory, production integrations, and
+                            technical recovery of existing projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row s-footer__buttons">
+                <div class="column xl-4 tab-12">
+                    <a href="mailto:xeeshanqaswar@gmail.com?subject=Project%20enquiry" class="btn btn--primary btn--large u-fullwidth">Discuss a Project</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/" class="btn btn--stroke btn--large u-fullwidth">View LinkedIn</a>
+                </div>
+                <div class="column xl-4 tab-12">
+                    <a target="_blank" rel="noopener" href="../../Zeeshan_Qaswar_Resume.pdf" class="btn btn--stroke btn--large u-fullwidth">View Resume</a>
+                </div>
+            </div>
+
+            <div class="row s-footer__bottom">
+                <div class="column xl-6 lg-12">
+                    <ul class="s-footer__social social-list">
+                        <li>
+                            <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/zeeshanqaswar/">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M8.339 18.337H5.667v-8.59h2.672zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096m11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"></path></svg>
+                                <span class="u-screen-reader-text">LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column xl-6 lg-12">
+                    <p class="ss-copyright">
+                        <span>© Copyright Zeeshan Qaswar</span>
+                        <span>Based on the <a href="https://styleshout.com/free-templates/hudson/" target="_blank" rel="noopener">Hudson template by StyleShout</a></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);" aria-hidden="true">
+                        <path d="M5.536 21.886a1.004 1.004 0 0 0 1.033-.064l13-9a1 1 0 0 0 0-1.644l-13-9A1 1 0 0 0 5 3v18a1 1 0 0 0 .536.886z"></path>
+                    </svg>
+                    <span class="u-screen-reader-text">Back to top</span>
+                </a>
+                <span aria-hidden="true">Back To Top</span>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="../../js/plugins.js"></script>
+    <script src="../../js/main.js"></script>
+
+</body>
+
+</html>
